@@ -50,3 +50,21 @@ frontend/next-env.d.ts
 
 # OS
 Thumbs.db
+
+# strapi (backend CMS)
+strapi/node_modules/
+strapi/.cache/
+strapi/.tmp/
+strapi/build/
+strapi/.env
+strapi/.env*.local
+strapi/public/uploads/
+strapi/.strapi-updater.json
+strapi/database/data/
+strapi/database/dumps/*.sql
+strapi/database/dumps/*.sql.gz
+
+# docker/dev data
+.data/
+docker-compose.override.yml
+.docker/
