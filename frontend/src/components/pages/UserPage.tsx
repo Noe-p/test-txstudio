@@ -10,11 +10,11 @@ interface UserPageProps {
 export function UserPage({ slug }: UserPageProps) {
   return slug ? (
     <Layout>
-      <H1>Project: {slug}</H1>
+      <H1>{`Project: ${slug}`}</H1>
     </Layout>
   ) : (
     <Layout>
-      <H1>Loading</H1>
+      <H1>{'Loading'}</H1>
     </Layout>
   );
 }

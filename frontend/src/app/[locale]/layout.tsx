@@ -2,6 +2,7 @@
 
 import { AppProvider } from '@/contexts/AppContext';
 import { messages } from '@/i18n/config';
+import { QueryProvider } from '@/providers/QueryProvider';
 import { IntlProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
 import { ReactNode, useEffect, useState } from 'react';
@@ -33,7 +34,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="m-0 p-0">
         <IntlProvider timeZone={timeZone} messages={messages['fr']} locale={'fr'}>
-          <AppProvider>{children}</AppProvider>
+          <QueryProvider>
+            <AppProvider>{children}</AppProvider>
+          </QueryProvider>
         </IntlProvider>
       </body>
     </html>
