@@ -1,4 +1,3 @@
-'use client';
 import { Col } from '@/components/utils/Flex';
 import { cn } from '@/services/utils';
 import React, { ReactNode } from 'react';
@@ -28,7 +27,7 @@ interface PageProps {
 }
 
 const Page = ({ children, className }: PageProps) => (
-  <div className={cn('flex flex-col items-center min-h-screen pt-18 mb-5 md:mb-20', className)}>
+  <div className={cn('flex flex-col items-center min-h-screen mb-5 md:mb-20', className)}>
     {children}
   </div>
 );

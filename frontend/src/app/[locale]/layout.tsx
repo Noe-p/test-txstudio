@@ -4,7 +4,7 @@ import { AppProvider } from '@/contexts/AppContext';
 import { messages } from '@/i18n/config';
 import { IntlProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import '../../static/styles/app.css';
 
 const inter = Inter({
@@ -18,7 +18,13 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const [timeZone, setTimeZone] = useState('UTC');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    }
+  }, []);
 
   return (
     <html lang={'fr'} className={inter.variable}>

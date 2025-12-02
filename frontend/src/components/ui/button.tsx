@@ -1,9 +1,8 @@
+import { cn } from '@/services/utils';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2, MoveRight } from 'lucide-react';
 import * as React from 'react';
-
-import { cn } from '@/services/utils';
-import { Loader2 } from 'lucide-react';
 
 const buttonVariants = cva(
   'inline-flex text-primary items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -14,7 +13,7 @@ const buttonVariants = cva(
         destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline: 'border text-success border-success bg-transparent hover:bg-success/10',
         secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        ghost: 'text-success border-b border-success rounded-none hover:opacity-80 gap-2 text-base',
         link: 'text-success underline-offset-4 hover:underline',
       },
       size: {
@@ -54,7 +53,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {children}
           </>
         ) : (
-          children
+          <>
+            {children}
+            {variant === 'ghost' && <MoveRight className="h-5 w-5" />}
+          </>
         )}
       </Comp>
     );

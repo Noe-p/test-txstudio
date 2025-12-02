@@ -1,9 +1,9 @@
+'use client';
 import { cn } from '@/services/utils';
 import NextImage from 'next/image';
 import React, { useState } from 'react';
 
-interface ImageProps
-  extends Omit<React.ComponentProps<typeof NextImage>, 'alt'> {
+interface ImageProps extends Omit<React.ComponentProps<typeof NextImage>, 'alt'> {
   alt: string; // Rendre alt obligatoire pour l'accessibilité
   fallbackSrc?: string; // Image de fallback en cas d'erreur
   showLoadingIndicator?: boolean; // Afficher un indicateur de chargement
@@ -42,30 +42,30 @@ export function Image(props: ImageProps): React.JSX.Element {
       <div
         className={cn(
           'w-full h-full bg-gray-200 flex items-center justify-center rounded-lg',
-          className
+          className,
         )}
       >
-        <span className='text-gray-500 text-sm'>{'Image non disponible'}</span>
+        <span className="text-gray-500 text-sm">{'Image non disponible'}</span>
       </div>
     );
   }
 
   return (
-    <div className='relative'>
+    <div className="relative">
       <NextImage
         src={currentSrc}
         className={cn(
           'w-full h-full object-cover object-center rounded-lg',
           isLoading && 'blur-sm scale-105',
-          className
+          className,
         )}
         onLoad={handleLoad}
         onError={handleError}
         {...imageProps}
       />
       {showLoadingIndicator && isLoading && (
-        <div className='absolute inset-0 flex items-center justify-center bg-black/20'>
-          <div className='w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin' />
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+          <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
         </div>
       )}
     </div>
