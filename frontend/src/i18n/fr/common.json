@@ -17,5 +17,26 @@
     "upTitle": "FINANCEMENT PROFESSIONNEL À COURT TERME.",
     "title": "Notre intérêt, c'est le vôtre.",
     "subtitle": "Simple, efficace et rapide. Profitez du service Liqtrade sans garantie personnelle."
+  },
+  "loans": {
+    "nav": {
+      "item1": "Prêts",
+      "item2": "Affacturage"
+    },
+    "description": "Des taux compétitifs en quelques clics.<br></br>Quel que soit votre projet, nous vous accompagnons de manière bienveillante avec les meilleurs outils en ligne. Oubliez le parcours du combattant, à vous le financement professionnel à court terme. Chez Liqtrade nous vous aidons à évoluer à travers des solutions de financement simples, efficaces et compétitives en seulement quelques clics.",
+    "list": {
+      "title": "TPE/PME, comptez sur nous pour vous aider à :",
+      "items": {
+        "item1": "Refinancer son entreprise",
+        "item2": "Ouvrir une nouvelle agence",
+        "item3": "Faire connaitre son entreprise",
+        "item4": "Se lancer à l’international",
+        "item5": "Digitaliser son entreprise",
+        "item6": "Acquérir une entreprise",
+        "item7": "Transformer son entreprise",
+        "item8": "Financer des projets de développements durables"
+      },
+      "cta": "Vidéo de présentation"
+    }
   }
 }

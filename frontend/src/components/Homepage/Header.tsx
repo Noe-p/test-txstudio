@@ -1,10 +1,10 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { Button } from './ui/button';
-import { Col, Row } from './utils/Flex';
-import { Col1, Grid2 } from './utils/Grid';
-import { P14, Title } from './utils/Texts';
+import { Button } from '../ui/button';
+import { Col, Row } from '../utils/Flex';
+import { Col1, Grid2 } from '../utils/Grid';
+import { P14, Title } from '../utils/Texts';
 
 export function Header(): React.JSX.Element {
   const tCommons = useTranslations('common');
