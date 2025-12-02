@@ -1,0 +1,17 @@
+{
+    "collectionName": "components_cta_link_buttons",
+    "info": {
+        "displayName": "link button",
+        "icon": "link"
+    },
+    "options": {},
+    "attributes": {
+        "title": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string"
+        }
+    },
+    "config": {}
+}

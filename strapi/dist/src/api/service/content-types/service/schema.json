@@ -1,0 +1,26 @@
+{
+    "kind": "collectionType",
+    "collectionName": "services",
+    "info": {
+        "singularName": "service",
+        "pluralName": "services",
+        "displayName": "Service"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "nav": {
+            "type": "string"
+        },
+        "description": {
+            "type": "blocks"
+        },
+        "button": {
+            "type": "component",
+            "component": "cta.link-button",
+            "repeatable": false
+        }
+    }
+}
