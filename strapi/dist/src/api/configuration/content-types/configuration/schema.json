@@ -1,0 +1,25 @@
+{
+    "kind": "singleType",
+    "collectionName": "configurations",
+    "info": {
+        "singularName": "configuration",
+        "pluralName": "configurations",
+        "displayName": "Configuration"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "logo": {
+            "type": "media",
+            "multiple": false,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        }
+    }
+}

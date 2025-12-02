@@ -460,6 +460,34 @@ export interface ApiAdvantageAdvantage extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiConfigurationConfiguration extends Struct.SingleTypeSchema {
+  collectionName: 'configurations';
+  info: {
+    displayName: 'Configuration';
+    pluralName: 'configurations';
+    singularName: 'configuration';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::configuration.configuration'
+    > &
+      Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
   collectionName: 'headers';
   info: {
@@ -1032,6 +1060,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::advantage.advantage': ApiAdvantageAdvantage;
+      'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::header.header': ApiHeaderHeader;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
