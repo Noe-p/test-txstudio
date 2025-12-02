@@ -1,10 +1,10 @@
 import { Generic } from '../generics';
-import { Media } from '../media';
+import { MediaType } from '../media';
 
 export interface AdvantageType extends Generic {
   title: string;
   description: string;
-  icon: Media;
+  icon: MediaType;
 }
 
 export interface AdvantagesResponse {

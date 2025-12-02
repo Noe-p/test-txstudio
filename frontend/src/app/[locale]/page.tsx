@@ -10,6 +10,13 @@ export default async function Page(): Promise<React.JSX.Element> {
   let headerData = null;
   let advantagesData = null;
   let servicesData = null;
+  let configurationData = null;
+
+  try {
+    configurationData = await strapiApi.configuration.get();
+  } catch (error) {
+    console.error('Failed to fetch configuration data:', error);
+  }
 
   try {
     headerData = await strapiApi.header.get();
@@ -30,7 +37,12 @@ export default async function Page(): Promise<React.JSX.Element> {
   }
 
   return (
-    <HomePage headerData={headerData} advantagesData={advantagesData} servicesData={servicesData} />
+    <HomePage
+      headerData={headerData}
+      advantagesData={advantagesData}
+      servicesData={servicesData}
+      configurationData={configurationData}
+    />
   );
 }
 

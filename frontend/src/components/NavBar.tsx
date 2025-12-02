@@ -11,9 +11,10 @@ import React from 'react';
 
 interface NavBarProps {
   className?: string;
+  logoUrl?: string | undefined;
 }
 
-export function NavBar({ className }: NavBarProps): React.JSX.Element {
+export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
   const t = useTranslations('common');
 
   return (
@@ -25,7 +26,13 @@ export function NavBar({ className }: NavBarProps): React.JSX.Element {
       <RowBetween className="w-full">
         <RowCenter className="gap-18">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.webP" alt={t('navbar.logo')} width={150} height={50} priority />
+            <Image
+              src={logoUrl || '/logo.webP'}
+              alt={t('navbar.logo')}
+              width={150}
+              height={50}
+              priority
+            />
           </Link>
           <RowCenter className="gap-10 hidden md:flex">
             <Link href="/pret">

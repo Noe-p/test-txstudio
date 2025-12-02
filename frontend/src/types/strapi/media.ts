@@ -20,7 +20,7 @@ export interface ImageFormats {
   thumbnail?: ImageFormat;
 }
 
-export interface Media extends Generic {
+export interface MediaType extends Generic {
   name: string;
   alternativeText: string | null;
   caption: string | null;

@@ -1,5 +1,6 @@
 import { Col } from '@/components/utils/Flex';
 import { cn } from '@/services/utils';
+import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import React, { ReactNode } from 'react';
 import { Footer } from '../Footer';
 import { NavBar } from '../NavBar';
@@ -7,14 +8,19 @@ import { NavBar } from '../NavBar';
 interface LayoutProps {
   children?: ReactNode;
   className?: string;
+  configurationData?: ConfigurationType | null;
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
-  const { children, className } = props;
+  const { children, className, configurationData } = props;
+
+  const logoUrl = configurationData?.logo?.url
+    ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
+    : undefined;
 
   return (
     <Col className="bg-background text-foreground m-0 p-0">
-      <NavBar />
+      <NavBar logoUrl={logoUrl} />
       <Page className={className ?? ''}>{children}</Page>
       <Footer />
     </Col>

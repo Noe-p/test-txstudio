@@ -1,5 +1,6 @@
 import { AdvantageType } from '@/types/strapi/collectionTypes/advantage';
 import { ServiceType } from '@/types/strapi/collectionTypes/service';
+import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { HeaderType } from '@/types/strapi/singleTypes/header';
 import React from 'react';
 import { Advantages } from '../Homepage/Advantages';
@@ -11,15 +12,17 @@ interface HomePageProps {
   headerData: HeaderType | null;
   advantagesData: AdvantageType[] | null;
   servicesData: ServiceType[] | null;
+  configurationData: ConfigurationType | null;
 }
 
 export function HomePage({
   headerData,
   advantagesData,
   servicesData,
+  configurationData,
 }: HomePageProps): React.JSX.Element {
   return (
-    <Layout>
+    <Layout configurationData={configurationData}>
       <Header data={headerData} />
       <Services data={servicesData} />
       <Advantages data={advantagesData} />
