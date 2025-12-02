@@ -18,7 +18,7 @@
             "type": "string"
         },
         "subTitle": {
-            "type": "string"
+            "type": "text"
         },
         "header": {
             "type": "media",
