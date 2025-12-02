@@ -5,9 +5,7 @@ export interface HeaderType extends Generic {
   upTitle: string;
   title: string;
   subtitle: string;
-  header: {
-    data: Media;
-  };
+  header: Media;
 }
 
 export interface HeaderResponse {

@@ -20,6 +20,14 @@ const nextConfig = {
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 31536000, // 1 an
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+    ],
   },
 
   // Headers de sécurité et cache
@@ -39,8 +47,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Permissions-Policy',
-            value:
-              'interest-cohort=(), camera=(), microphone=(), geolocation=()',
+            value: 'interest-cohort=(), camera=(), microphone=(), geolocation=()',
           },
           {
             key: 'X-Content-Type-Options',

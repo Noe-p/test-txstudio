@@ -11,10 +11,15 @@ interface HeaderProps {
   data: HeaderType | null;
 }
 
-export function Header({ data: header }: HeaderProps): React.JSX.Element {
+export function Header({ data }: HeaderProps): React.JSX.Element {
   const tCommons = useTranslations('common');
 
-  const imageUrl = header?.header?.data?.url || '/header.webP';
+  if (!data) {
+    return <></>;
+  }
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
+  const imageUrl = data.header?.url ? `${apiUrl}${data.header.url}` : null;
 
   return (
     <header className="w-full h-screen relative overflow-hidden">
@@ -24,20 +29,16 @@ export function Header({ data: header }: HeaderProps): React.JSX.Element {
           <Col className="gap-20 max-w-100">
             {/* Textes */}
             <Col className="gap-4">
-              <P14 className="text-primary font-bold uppercase tracking-wide">
-                {header?.upTitle || tCommons('header.upTitle')}
-              </P14>
-              <Title>{header?.title || tCommons('header.title')}</Title>
-              <P14 className="text-muted-foreground">
-                {header?.subtitle || tCommons('header.subtitle')}
-              </P14>
+              <P14 className="text-primary font-bold uppercase tracking-wide">{data.upTitle}</P14>
+              <Title>{data.title}</Title>
+              <P14 className="text-muted-foreground">{data.subtitle}</P14>
             </Col>
 
             {/* Boutons */}
             <Row className="gap-4">
-              <Button size="lg">{tCommons('navbar.login')}</Button>
+              <Button size="lg">{tCommons('generics.login')}</Button>
               <Button variant="ghost" size="lg" className="px-0 mx-6">
-                {tCommons('navbar.signup')}
+                {tCommons('generics.signup')}
               </Button>
             </Row>
           </Col>
@@ -45,15 +46,17 @@ export function Header({ data: header }: HeaderProps): React.JSX.Element {
 
         {/* Partie droite - Image */}
         <Col1 className="relative h-full flex items-center">
-          <div className="relative w-full h-2/3">
-            <Image
-              src={imageUrl}
-              alt={header?.header?.data?.alternativeText || 'Header'}
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          </div>
+          {imageUrl && (
+            <div className="relative w-full h-2/3">
+              <Image
+                src={imageUrl}
+                alt={data.title}
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </div>
+          )}
         </Col1>
       </Grid2>
     </header>

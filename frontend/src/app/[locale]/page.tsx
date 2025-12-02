@@ -8,13 +8,21 @@ export async function generateStaticParams() {
 
 export default async function Page(): Promise<React.JSX.Element> {
   let headerData = null;
+  let advantagesData = null;
+
   try {
     headerData = await strapiApi.header.get();
   } catch (error) {
     console.error('Failed to fetch header data:', error);
   }
 
-  return <HomePage headerData={headerData} />;
+  try {
+    advantagesData = await strapiApi.advantages.getAll();
+  } catch (error) {
+    console.error('Failed to fetch advantages data:', error);
+  }
+
+  return <HomePage headerData={headerData} advantagesData={advantagesData} />;
 }
 
 export const dynamic = 'force-static';

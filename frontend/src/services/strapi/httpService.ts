@@ -76,7 +76,11 @@ class HTTPService {
     const response = await myAxiosInstance[method]<T>(...(args as [string]));
 
     if (response.status >= 400) {
-      console.error('[DEBUG] response', response);
+      console.error('[DEBUG] Error response:', {
+        status: response.status,
+        statusText: response.statusText,
+        data: response.data,
+      });
       const error: HttpError = new Error();
       error.data = response.data;
       error.status = response.status;
