@@ -1,7 +1,10 @@
 'use client';
+import { useUser } from '@/hooks/useAuth';
+import { ROUTES } from '@/services/routes';
 import { HeaderType } from '@/types/strapi/singleTypes/header';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Col, Row } from '../utils/Flex';
 import { Col1, Grid2 } from '../utils/Grid';
@@ -13,6 +16,7 @@ interface HeaderProps {
 
 export function Header({ data }: HeaderProps): React.JSX.Element {
   const tCommons = useTranslations('common');
+  const user = useUser();
 
   if (!data) {
     return <></>;
@@ -36,10 +40,20 @@ export function Header({ data }: HeaderProps): React.JSX.Element {
 
             {/* Boutons */}
             <Row className="gap-4">
-              <Button size="lg">{tCommons('generics.login')}</Button>
-              <Button variant="ghost" size="lg" className="px-0 mx-6">
-                {tCommons('generics.signup')}
-              </Button>
+              {user ? (
+                <Link href={ROUTES.user(user.username)}>
+                  <Button size="lg">{tCommons('navbar.dashboard')}</Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href={ROUTES.login}>
+                    <Button size="lg">{tCommons('generics.login')}</Button>
+                  </Link>
+                  <Button variant="ghost" size="lg" className="px-0 mx-6 cursor-not-allowed">
+                    {tCommons('generics.signup')}
+                  </Button>
+                </>
+              )}
             </Row>
           </Col>
         </Col1>

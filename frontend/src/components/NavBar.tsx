@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { RowBetween, RowCenter } from '@/components/utils/Flex';
 import { P16 } from '@/components/utils/Texts';
+import { useUser } from '@/hooks/useAuth';
+import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -16,6 +18,7 @@ interface NavBarProps {
 
 export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
   const t = useTranslations('common');
+  const user = useUser();
 
   return (
     <nav
@@ -67,16 +70,26 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
             </Link>
           </RowCenter>
           <RowCenter className="gap-3">
-            <Link href="/inscription">
-              <Button variant="outline" size="default">
-                {t('navbar.signup')}
-              </Button>
-            </Link>
-            <Link href="/connexion">
-              <Button variant="default" size="default">
-                {t('navbar.login')}
-              </Button>
-            </Link>
+            {user ? (
+              <Link href={ROUTES.user(user.username)}>
+                <Button variant="default" size="default">
+                  {t('navbar.dashboard')}
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="#">
+                  <Button variant="outline" size="default" className=" cursor-not-allowed">
+                    {t('generics.signup')}
+                  </Button>
+                </Link>
+                <Link href={ROUTES.login}>
+                  <Button variant="default" size="default">
+                    {t('generics.login')}
+                  </Button>
+                </Link>
+              </>
+            )}
           </RowCenter>
         </RowCenter>
       </RowBetween>

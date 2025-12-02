@@ -73,22 +73,17 @@ class HTTPService {
     }
     const myAxiosInstance = this.httpUrl;
 
-    const response = await myAxiosInstance[method]<T>(...(args as [string]));
-
-    if (response.status >= 400) {
-      console.error('[DEBUG] Error response:', {
-        status: response.status,
-        statusText: response.statusText,
-        data: response.data,
-      });
-      const error: HttpError = new Error();
-      error.data = response.data;
-      error.status = response.status;
-      error.statusText = response.statusText;
-      throw error;
+    try {
+      const response = await myAxiosInstance[method]<T>(...(args as [string]));
+      return response;
+    } catch (error) {
+      // Si c'est une erreur HTTP, la propager
+      if (error instanceof Error) {
+        throw error;
+      }
+      // Sinon, créer une nouvelle erreur
+      throw new Error('An unexpected error occurred');
     }
-
-    return response;
   }
 
   private createNewAxios(): AxiosInstance {
@@ -115,7 +110,22 @@ class HTTPService {
 
   private handleResponse(response: string): unknown {
     if (!response) return {};
-    return JSON.parse(response) as unknown;
+    const parsed = JSON.parse(response) as {
+      data?: unknown;
+      error?: { status?: number; name?: string; message?: string; details?: unknown };
+    };
+
+    // Si la réponse contient une erreur Strapi, la lancer
+    if (parsed.error) {
+      const error: HttpError = new Error(parsed.error.message || 'An error occurred');
+      error.data = parsed.error;
+      if (parsed.error.status !== undefined) {
+        error.status = parsed.error.status;
+      }
+      throw error;
+    }
+
+    return parsed;
   }
 }
 

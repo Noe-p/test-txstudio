@@ -1,7 +1,29 @@
 {
   "generics": {
     "login": "Se connecter",
-    "signup": "S'inscrire"
+    "signup": "S'inscrire",
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "login": {
+    "title": "Se connecter",
+    "description": "Accédez à votre tableau de bord en toute sécurité.",
+    "welcome": "Bienvenue",
+    "welcomeDescription": "Des taux compétitifs en quelques clics. Accédez à votre espace pour gérer vos demandes et accélérer vos démarches.",
+    "emailPlaceholder": "you@company.com",
+    "passwordPlaceholder": "••••••••",
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "validation": {
+      "emailInvalid": "Veuillez entrer une adresse email valide",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères"
+    },
+    "benefits": {
+      "secure": "Sécurisé et rapide",
+      "tracking": "Suivi en temps réel",
+      "support": "Support bienveillant",
+      "tools": "Outils premium en ligne"
+    }
   },
   "home": {
     "name": "Home Page"
@@ -13,28 +35,13 @@
     "simulator": "Simulateur",
     "contact": "Contact",
     "publications": "Publications",
-    "signup": "S'inscrire",
-    "login": "Se connecter"
+    "dashboard": "Voir le Dashboard"
   },
-  "loans": {
-    "nav": {
-      "item1": "Prêts",
-      "item2": "Affacturage"
-    },
-    "description": "Des taux compétitifs en quelques clics.<br></br>Quel que soit votre projet, nous vous accompagnons de manière bienveillante avec les meilleurs outils en ligne. Oubliez le parcours du combattant, à vous le financement professionnel à court terme. Chez Liqtrade nous vous aidons à évoluer à travers des solutions de financement simples, efficaces et compétitives en seulement quelques clics.",
-    "list": {
-      "title": "TPE/PME, comptez sur nous pour vous aider à :",
-      "items": {
-        "item1": "Refinancer son entreprise",
-        "item2": "Ouvrir une nouvelle agence",
-        "item3": "Faire connaitre son entreprise",
-        "item4": "Se lancer à l’international",
-        "item5": "Digitaliser son entreprise",
-        "item6": "Acquérir une entreprise",
-        "item7": "Transformer son entreprise",
-        "item8": "Financer des projets de développements durables"
-      },
-      "cta": "Vidéo de présentation"
-    }
+  "user": {
+    "welcome": "Bienvenue, {username}!",
+    "loading": "Chargement...",
+    "accountStatus": "Compte {status}",
+    "confirmed": "confirmé",
+    "notConfirmed": "non confirmé"
   }
 }
