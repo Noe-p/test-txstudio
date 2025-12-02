@@ -14,9 +14,9 @@ export function Layout(props: LayoutProps): React.JSX.Element {
   const { children, className } = props;
 
   return (
-    <Col className="bg-background text-foreground">
+    <Col className="bg-background text-foreground m-0 p-0">
       <NavBar />
-      {className ? <Page>{children}</Page> : <Page>{children}</Page>}
+      <Page className={className ?? ''}>{children}</Page>
       <Footer />
     </Col>
   );
@@ -24,8 +24,11 @@ export function Layout(props: LayoutProps): React.JSX.Element {
 
 interface PageProps {
   children?: ReactNode;
+  className?: string;
 }
 
-const Page = ({ children }: PageProps) => (
-  <div className={cn('lex flex-col items-center min-h-screen mb-5 md:mb-20')}>{children}</div>
+const Page = ({ children, className }: PageProps) => (
+  <div className={cn('flex flex-col items-center min-h-screen pt-18 mb-5 md:mb-20', className)}>
+    {children}
+  </div>
 );

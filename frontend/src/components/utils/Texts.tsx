@@ -66,10 +66,7 @@ export function P24({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p
-      className={cn('text-[18px] md:text-[24px] font-mono font-normal leading-0', className)}
-      {...props}
-    >
+    <p className={cn('text-[18px] md:text-[24px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );
@@ -81,10 +78,7 @@ export function P18({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p
-      className={cn('text-[15px] md:text-[18px] font-mono font-normal leading-0', className)}
-      {...props}
-    >
+    <p className={cn('text-[15px] md:text-[18px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );
@@ -96,7 +90,7 @@ export function P16({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-[16px] font-mono font-normal leading-0', className)} {...props}>
+    <p className={cn('text-[16px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );
@@ -108,7 +102,7 @@ export function P14({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-[14px] font-mono font-normal leading-0', className)} {...props}>
+    <p className={cn('text-[14px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );
@@ -120,7 +114,7 @@ export function P12({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-[12px] font-mono font-normal leading-0', className)} {...props}>
+    <p className={cn('text-[12px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );
@@ -132,7 +126,7 @@ export function P10({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLParagraphElement>) {
   return (
-    <p className={cn('text-[10px] font-mono font-normal leading-0', className)} {...props}>
+    <p className={cn('text-[10px] font-normal leading-0', className)} {...props}>
       {children}
     </p>
   );

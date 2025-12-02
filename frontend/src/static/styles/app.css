@@ -4,33 +4,43 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* Blanc pur */
-    --foreground: 0 0% 9%; /* Texte sombre */
+    /* Couleurs générales */
+    --background: 0 0% 100%;
+    --foreground: 218 15% 15%;
 
-    --card: 0 0% 100%; /* Cartes blanches */
-    --card-foreground: 0 0% 9%;
+    /* Surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 218 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
+    --popover-foreground: 218 15% 15%;
 
-    --primary: 213 94% 68%; /* Bleu moderne #3B82F6 */
+    /* Bleu fintech premium */
+    --primary: 217 92% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%; /* Gris très clair #F5F5F5 */
-    --secondary-foreground: 0 0% 9%;
+    /* Secondaire */
+    --secondary: 220 20% 97%;
+    --secondary-foreground: 218 15% 20%;
 
-    --muted: 0 0% 96%; /* Gris doux pour fond */
-    --muted-foreground: 0 0% 45%; /* Gris moyen pour texte */
+    /* Muted */
+    --muted: 220 20% 96%;
+    --muted-foreground: 220 8% 45%;
 
-    --accent: 213 94% 68%; /* Même bleu que primary pour cohérence */
+    /* Accent */
+    --accent: 217 92% 65%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%; /* Rouge standard */
+    --success: 151 62% 56%;
+
+    /* Rouge */
+    --destructive: 0 78% 62%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%; /* Bordures grises claires */
-    --input: 0 0% 96%; /* Background input gris clair */
-    --ring: 213 94% 68%; /* Focus ring bleu */
+    /* Bordures */
+    --border: 220 15% 90%;
+    --input: 220 20% 97%;
+    --ring: 217 92% 55%;
 
     --radius: 0.5rem;
   }

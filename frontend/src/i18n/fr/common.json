@@ -2,5 +2,15 @@
   "generics": {},
   "home": {
     "name": "Home Page"
+  },
+  "navbar": {
+    "logo": "Logo",
+    "loan": "Prêt",
+    "factoring": "Affacturage",
+    "simulator": "Simulateur",
+    "contact": "Contact",
+    "publications": "Publications",
+    "signup": "S'inscrire",
+    "login": "Se connecter"
   }
 }
