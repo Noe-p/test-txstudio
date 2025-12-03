@@ -34,12 +34,13 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
   }, []);
 
   return (
-    <UserLayout className="p-10" configurationData={configurationData ?? null}>
+    <UserLayout configurationData={configurationData ?? null}>
       <Col className="gap-6">
         {!mounted ? (
           <H1>{t('user.loading')}</H1>
         ) : user ? (
           <Col className="gap-10">
+            {/*  Header */}
             <RowBetween>
               <H1>{t('user.welcome', { username: user.username })}</H1>
               <Avatar className="h-10 w-10">
@@ -57,6 +58,8 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
                 </AvatarFallback>
               </Avatar>
             </RowBetween>
+
+            {/* Tabs */}
             <Col className="gap-4 w-full">
               <RowBetween className="items-center w-full">
                 <Tabs defaultValue="loans" className="w-full">

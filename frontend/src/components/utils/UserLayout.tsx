@@ -59,8 +59,6 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
     }
   }, []);
 
-  console.log('User in UserLayout:', user);
-
   useEffect(() => {
     const logoUrl = configurationData?.logo?.url
       ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
@@ -249,7 +247,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
               className="h-8 w-auto object-contain"
             />
           </header>
-          <main className={cn('flex-1 overflow-auto', className)}>{children}</main>
+          <main className={cn('flex-1 overflow-auto p-10 pb-30', className)}>{children}</main>
         </div>
       </div>
     </SidebarProvider>

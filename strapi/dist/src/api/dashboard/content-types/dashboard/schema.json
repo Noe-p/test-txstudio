@@ -24,6 +24,9 @@
         },
         "lastTransaction": {
             "type": "string"
+        },
+        "financialGraphData": {
+            "type": "json"
         }
     }
 }
