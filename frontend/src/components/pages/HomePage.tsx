@@ -12,7 +12,7 @@ interface HomePageProps {
   headerData: HeaderType | null;
   advantagesData: AdvantageType[] | null;
   servicesData: ServiceType[] | null;
-  configurationData: ConfigurationType | null;
+  configurationData?: ConfigurationType | null;
 }
 
 export function HomePage({
@@ -22,7 +22,7 @@ export function HomePage({
   configurationData,
 }: HomePageProps): React.JSX.Element {
   return (
-    <Layout configurationData={configurationData}>
+    <Layout configurationData={configurationData ?? null}>
       <Header data={headerData} />
       <Services data={servicesData} />
       <Advantages data={advantagesData} />

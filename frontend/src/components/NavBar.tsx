@@ -6,6 +6,7 @@ import { P16 } from '@/components/utils/Texts';
 import { useUser } from '@/hooks/useAuth';
 import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
+import { IMAGE_FALLBACK } from '@/static/constants';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +14,7 @@ import React from 'react';
 
 interface NavBarProps {
   className?: string;
-  logoUrl?: string | undefined;
+  logoUrl?: string | null;
 }
 
 export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
@@ -30,11 +31,12 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
         <RowCenter className="gap-18">
           <Link href="/" className="flex items-center">
             <Image
-              src={logoUrl || '/logo.webP'}
+              src={logoUrl || IMAGE_FALLBACK}
               alt={t('navbar.logo')}
               width={150}
               height={50}
               priority
+              className="max-h-10 object-contain"
             />
           </Link>
           <RowCenter className="gap-10 hidden md:flex">

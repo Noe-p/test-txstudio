@@ -1,8 +1,9 @@
 'use client';
 
-import { AppProvider } from '@/contexts/AppContext';
+import { AppProvider, useAppContext } from '@/contexts/AppContext';
 import { messages } from '@/i18n/config';
 import { QueryProvider } from '@/providers/QueryProvider';
+import { IMAGE_FALLBACK } from '@/static/constants';
 import { IntlProvider } from 'next-intl';
 import { Inter } from 'next/font/google';
 import { ReactNode, useEffect, useState } from 'react';
@@ -20,6 +21,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const [timeZone, setTimeZone] = useState('UTC');
+  const { logoUrl } = useAppContext();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -30,7 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang={'fr'} className={inter.variable}>
       <head>
-        <link rel="icon" href="/logo.webP" type="image/webp" />
+        <link rel="icon" href={logoUrl ?? IMAGE_FALLBACK} type="image/webp" />
       </head>
       <body className="m-0 p-0">
         <IntlProvider timeZone={timeZone} messages={messages['fr']} locale={'fr'}>

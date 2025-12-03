@@ -1,8 +1,10 @@
 'use client';
 
 import { Col } from '@/components/utils/Flex';
+import { useAppContext } from '@/contexts';
 import { useIsAuthenticated } from '@/hooks/useAuth';
 import { cn } from '@/services/utils';
+import { IMAGE_FALLBACK } from '@/static/constants';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { useRouter } from 'next/navigation';
 import React, { ReactNode, useEffect } from 'react';
@@ -12,14 +14,22 @@ import { NavBar } from '../NavBar';
 interface LayoutProps {
   children?: ReactNode;
   className?: string;
-  configurationData?: ConfigurationType | null;
   requireAuth?: boolean;
+  configurationData?: ConfigurationType | null;
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
-  const { children, className, configurationData, requireAuth = false } = props;
+  const { children, className, requireAuth = false, configurationData } = props;
   const isAuthenticated = useIsAuthenticated();
   const router = useRouter();
+  const { setLogoUrl } = useAppContext();
+
+  useEffect(() => {
+    const logoUrl = configurationData?.logo?.url
+      ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
+      : IMAGE_FALLBACK;
+    setLogoUrl(logoUrl);
+  }, [configurationData, setLogoUrl]);
 
   useEffect(() => {
     if (requireAuth && !isAuthenticated) {
@@ -27,13 +37,15 @@ export function Layout(props: LayoutProps): React.JSX.Element {
     }
   }, [requireAuth, isAuthenticated, router]);
 
-  const logoUrl = configurationData?.logo?.url
-    ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
-    : undefined;
-
   return (
     <Col className="bg-background text-foreground m-0 p-0">
-      <NavBar logoUrl={logoUrl} />
+      <NavBar
+        logoUrl={
+          configurationData?.logo?.url
+            ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
+            : IMAGE_FALLBACK
+        }
+      />
       <Page className={className ?? ''}>{children}</Page>
       <Footer />
     </Col>
