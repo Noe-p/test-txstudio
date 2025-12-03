@@ -2,11 +2,9 @@
 
 import { Col } from '@/components/utils/Flex';
 import { useAppContext } from '@/contexts';
-import { useIsAuthenticated } from '@/hooks/useAuth';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
-import { useRouter } from 'next/navigation';
 import React, { ReactNode, useEffect } from 'react';
 import { Footer } from '../Footer';
 import { NavBar } from '../NavBar';
@@ -14,14 +12,11 @@ import { NavBar } from '../NavBar';
 interface LayoutProps {
   children?: ReactNode;
   className?: string;
-  requireAuth?: boolean;
   configurationData?: ConfigurationType | null;
 }
 
 export function Layout(props: LayoutProps): React.JSX.Element {
-  const { children, className, requireAuth = false, configurationData } = props;
-  const isAuthenticated = useIsAuthenticated();
-  const router = useRouter();
+  const { children, className, configurationData } = props;
   const { setLogoUrl } = useAppContext();
 
   useEffect(() => {
@@ -30,12 +25,6 @@ export function Layout(props: LayoutProps): React.JSX.Element {
       : IMAGE_FALLBACK;
     setLogoUrl(logoUrl);
   }, [configurationData, setLogoUrl]);
-
-  useEffect(() => {
-    if (requireAuth && !isAuthenticated) {
-      router.push('/');
-    }
-  }, [requireAuth, isAuthenticated, router]);
 
   return (
     <Col className="bg-background text-foreground m-0 p-0">

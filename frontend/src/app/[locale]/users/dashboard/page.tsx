@@ -1,18 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { UserPage } from '@/components/pages/UserPage';
+import { DashboardPage } from '@/components/pages/User/DashboardPage';
 import { strapiApi } from '@/services/strapi/api';
-import { PageBaseProps } from '@/types/next/PageBaseProps';
 
 export async function generateStaticParams() {
   return [];
 }
 
-export default async function Detail({ params }: PageBaseProps) {
-  const { slug } = await params;
-  if (!slug) {
-    throw new Error('Slug is required');
-  }
-
+export default async function Detail() {
   let configurationData = null;
 
   try {
@@ -21,5 +15,5 @@ export default async function Detail({ params }: PageBaseProps) {
     console.error('Failed to fetch configuration data:', error);
   }
 
-  return <UserPage slug={slug} configurationData={configurationData} />;
+  return <DashboardPage configurationData={configurationData} />;
 }

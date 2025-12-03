@@ -1,5 +1,7 @@
 export const ROUTES = {
   home: '/',
-  user: (slug: string) => `/users/${slug}`,
+  user: {
+    dashboard: '/users/dashboard',
+  },
   login: '/login',
 };

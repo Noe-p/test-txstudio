@@ -3,16 +3,15 @@ import { useUser } from '@/hooks/useAuth';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import { Col } from '../utils/Flex';
-import { Layout } from '../utils/Layout';
-import { H1, P16 } from '../utils/Texts';
+import { Col } from '../../utils/Flex';
+import { H1, P16 } from '../../utils/Texts';
+import { UserLayout } from '../../utils/UserLayout';
 
-interface UserPageProps {
-  slug: string;
+interface DashboardPageProps {
   configurationData?: ConfigurationType | null;
 }
 
-export function UserPage({ configurationData }: UserPageProps) {
+export function DashboardPage({ configurationData }: DashboardPageProps) {
   const [mounted, setMounted] = useState(false);
   const user = useUser();
   const t = useTranslations('common');
@@ -22,7 +21,7 @@ export function UserPage({ configurationData }: UserPageProps) {
   }, []);
 
   return (
-    <Layout className="pt-24" requireAuth={true} configurationData={configurationData ?? null}>
+    <UserLayout className="pt-24" configurationData={configurationData ?? null}>
       <Col className="gap-6 items-center">
         {!mounted ? (
           // Rendu par défaut pendant l'hydration (identique au SSR)
@@ -41,6 +40,6 @@ export function UserPage({ configurationData }: UserPageProps) {
           <H1>{t('user.loading')}</H1>
         )}
       </Col>
-    </Layout>
+    </UserLayout>
   );
 }

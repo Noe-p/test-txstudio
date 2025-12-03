@@ -41,7 +41,7 @@ export function Header({ data }: HeaderProps): React.JSX.Element {
             {/* Boutons */}
             <Row className="gap-4">
               {user ? (
-                <Link href={ROUTES.user(user.username)}>
+                <Link href={ROUTES.user.dashboard}>
                   <Button size="lg">{tCommons('navbar.dashboard')}</Button>
                 </Link>
               ) : (

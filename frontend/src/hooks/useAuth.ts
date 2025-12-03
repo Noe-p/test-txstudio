@@ -1,3 +1,4 @@
+import { ROUTES } from '@/services/routes';
 import { strapiApi } from '@/services/strapi/api';
 import { HttpService } from '@/services/strapi/httpService';
 import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
@@ -22,7 +23,7 @@ export const useLogin = () => {
       HttpService.setToken(data.jwt);
 
       // Rediriger vers la page utilisateur
-      router.push(`/users/${data.user.username}`);
+      router.push(ROUTES.user.dashboard);
     },
   });
 };

@@ -92,7 +92,7 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
                 </Link>
               </>
             ) : user ? (
-              <Link href={ROUTES.user(user.username)}>
+              <Link href={ROUTES.user.dashboard}>
                 <Button variant="default" size="default">
                   {t('navbar.dashboard')}
                 </Button>

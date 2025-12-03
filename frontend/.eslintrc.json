@@ -30,10 +30,7 @@
   "plugins": ["react", "@typescript-eslint", "deprecate"],
   "rules": {
     // TypeScript
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "argsIgnorePattern": "^_" }
-    ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/no-duplicate-enum-values": "off",
     "@typescript-eslint/interface-name-prefix": "off",
@@ -55,7 +52,7 @@
 
     // Général
     "quotes": ["error", "single", { "avoidEscape": true }],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "indent": "off",
     "no-empty-pattern": "off",
     "prefer-const": "error",
     "no-var": "error",

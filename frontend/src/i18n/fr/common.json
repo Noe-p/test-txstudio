@@ -43,5 +43,18 @@
     "accountStatus": "Compte {status}",
     "confirmed": "confirmé",
     "notConfirmed": "non confirmé"
+  },
+  "dashboard": {
+    "sidebar": {
+      "dashboard": "Tableau de Bord",
+      "transactions": "Mes transactions",
+      "clients": "Mes clients",
+      "support": "Assistance",
+      "notifications": "Mes notifications",
+      "settings": "Réglages",
+      "kycStatus": "Statut Vérification KYC",
+      "kycValid": "Validé",
+      "kycInvalid": "Non validé"
+    }
   }
 }
