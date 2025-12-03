@@ -39,11 +39,22 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
     return `${(value / 1000).toFixed(0).padStart(2, '0')}K`;
   };
 
+  // Types pour le tooltip
+  interface TooltipPayload {
+    dataKey: string;
+    value: number;
+  }
+
+  interface CustomTooltipProps {
+    active?: boolean;
+    payload?: TooltipPayload[];
+  }
+
   // Formater le tooltip
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
     useEffect(() => {
       if (active && payload && payload.length > 0) {
-        const activeSerie = payload.find((p: any) => p.dataKey === hoveredSerie);
+        const activeSerie = payload.find((p) => p.dataKey === hoveredSerie);
         const displayValue = activeSerie || payload[0];
         if (displayValue && typeof displayValue.value === 'number') {
           setHoveredY(displayValue.value);
@@ -54,7 +65,7 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
     }, [active, payload]);
 
     if (active && payload && payload.length > 0) {
-      const activeSerie = payload.find((p: any) => p.dataKey === hoveredSerie);
+      const activeSerie = payload.find((p) => p.dataKey === hoveredSerie);
       const displayValue = activeSerie || payload[0];
       const serieName = seriesNames[displayValue.dataKey as keyof typeof seriesNames];
 
@@ -165,9 +176,11 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
             strokeWidth={3}
             fill="url(#colorSerie1)"
             dot={false}
-            activeDot={(props: any) => {
+            activeDot={(props: { cx?: number | undefined; cy?: number | undefined }) => {
               const isClosest = hoveredSerie === 'serie1';
-              return isClosest ? <circle cx={props.cx} cy={props.cy} r={6} fill="#10b981" /> : null;
+              return isClosest && props.cx && props.cy ? (
+                <circle cx={props.cx} cy={props.cy} r={6} fill="#10b981" />
+              ) : null;
             }}
             isAnimationActive={false}
             onMouseEnter={() => setHoveredSerie('serie1')}
@@ -180,9 +193,11 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
             strokeWidth={3}
             fill="url(#colorSerie2)"
             dot={false}
-            activeDot={(props: any) => {
+            activeDot={(props: { cx?: number | undefined; cy?: number | undefined }) => {
               const isClosest = hoveredSerie === 'serie2';
-              return isClosest ? <circle cx={props.cx} cy={props.cy} r={6} fill="#06b6d4" /> : null;
+              return isClosest && props.cx && props.cy ? (
+                <circle cx={props.cx} cy={props.cy} r={6} fill="#06b6d4" />
+              ) : null;
             }}
             isAnimationActive={false}
             onMouseEnter={() => setHoveredSerie('serie2')}
@@ -195,9 +210,11 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
             strokeWidth={3}
             fill="url(#colorSerie3)"
             dot={false}
-            activeDot={(props: any) => {
+            activeDot={(props: { cx?: number | undefined; cy?: number | undefined }) => {
               const isClosest = hoveredSerie === 'serie3';
-              return isClosest ? <circle cx={props.cx} cy={props.cy} r={6} fill="#f97316" /> : null;
+              return isClosest && props.cx && props.cy ? (
+                <circle cx={props.cx} cy={props.cy} r={6} fill="#f97316" />
+              ) : null;
             }}
             isAnimationActive={false}
             onMouseEnter={() => setHoveredSerie('serie3')}
