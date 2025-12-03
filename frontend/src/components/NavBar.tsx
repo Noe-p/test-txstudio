@@ -10,7 +10,7 @@ import { IMAGE_FALLBACK } from '@/static/constants';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface NavBarProps {
   className?: string;
@@ -19,7 +19,12 @@ interface NavBarProps {
 
 export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
   const t = useTranslations('common');
+  const [mounted, setMounted] = useState(false);
   const user = useUser();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <nav
@@ -72,7 +77,21 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
             </Link>
           </RowCenter>
           <RowCenter className="gap-3">
-            {user ? (
+            {!mounted ? (
+              // Rendu par défaut pendant l'hydration (identique au SSR)
+              <>
+                <Link href="#">
+                  <Button variant="outline" size="default" className=" cursor-not-allowed">
+                    {t('generics.signup')}
+                  </Button>
+                </Link>
+                <Link href={ROUTES.login}>
+                  <Button variant="default" size="default">
+                    {t('generics.login')}
+                  </Button>
+                </Link>
+              </>
+            ) : user ? (
               <Link href={ROUTES.user(user.username)}>
                 <Button variant="default" size="default">
                   {t('navbar.dashboard')}
