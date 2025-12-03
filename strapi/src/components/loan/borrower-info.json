@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_loan_borrower_infos",
+  "info": {
+    "displayName": "Borrower Info"
+  },
+  "options": {},
+  "attributes": {
+    "contractNumber": {
+      "type": "string"
+    },
+    "borrowerId": {
+      "type": "string"
+    },
+    "requestedAmount": {
+      "type": "decimal"
+    },
+    "currentLoanAmount": {
+      "type": "decimal"
+    },
+    "monthlyPayment": {
+      "type": "decimal"
+    },
+    "durationMonths": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_loan_timelines",
+  "info": {
+    "displayName": "Timeline"
+  },
+  "options": {},
+  "attributes": {
+    "expectedClosureDate": {
+      "type": "date"
+    }
+  }
+}

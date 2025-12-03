@@ -583,6 +583,43 @@ export interface ApiHeaderHeader extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiLoanLoan extends Struct.CollectionTypeSchema {
+  collectionName: 'loans';
+  info: {
+    description: 'Gestion simplifi\u00E9e des pr\u00EAts pour d\u00E9monstration';
+    displayName: 'Loan';
+    pluralName: 'loans';
+    singularName: 'loan';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    borrowerInfo: Schema.Attribute.Component<'loan.borrower-info', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    documents: Schema.Attribute.Media<undefined, true>;
+    financialInfo: Schema.Attribute.Component<'loan.financial-info', false>;
+    loanStatus: Schema.Attribute.Enumeration<
+      ['Valid\u00E9', 'En attente', 'Clos']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'En attente'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::loan.loan'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    stateInfo: Schema.Attribute.Component<'loan.state-info', false>;
+    timeline: Schema.Attribute.Component<'loan.timeline', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    validationSteps: Schema.Attribute.Component<'loan.validation-step', true>;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -1132,6 +1169,7 @@ declare module '@strapi/strapi' {
       'api::dashboard.dashboard': ApiDashboardDashboard;
       'api::euribor-table.euribor-table': ApiEuriborTableEuriborTable;
       'api::header.header': ApiHeaderHeader;
+      'api::loan.loan': ApiLoanLoan;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

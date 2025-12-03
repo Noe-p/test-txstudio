@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_loan_validation_steps",
+  "info": {
+    "displayName": "Validation Step"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "isCompleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "requirements": {
+      "type": "text"
+    }
+  }
+}

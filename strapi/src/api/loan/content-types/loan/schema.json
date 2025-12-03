@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "loans",
+  "info": {
+    "singularName": "loan",
+    "pluralName": "loans",
+    "displayName": "Loan",
+    "description": "Gestion simplifiée des prêts pour démonstration"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "loanStatus": {
+      "type": "enumeration",
+      "required": true,
+      "default": "En attente",
+      "enum": [
+        "Validé",
+        "En attente",
+        "Clos"
+      ]
+    },
+    "stateInfo": {
+      "type": "component",
+      "component": "loan.state-info",
+      "repeatable": false
+    },
+    "borrowerInfo": {
+      "type": "component",
+      "component": "loan.borrower-info",
+      "repeatable": false
+    },
+    "financialInfo": {
+      "type": "component",
+      "component": "loan.financial-info",
+      "repeatable": false
+    },
+    "validationSteps": {
+      "type": "component",
+      "component": "loan.validation-step",
+      "repeatable": true
+    },
+    "documents": {
+      "type": "media",
+      "multiple": true
+    },
+    "timeline": {
+      "type": "component",
+      "component": "loan.timeline",
+      "repeatable": false
+    }
+  }
+}

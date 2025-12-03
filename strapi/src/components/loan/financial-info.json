@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_loan_financial_infos",
+  "info": {
+    "displayName": "Financial Info"
+  },
+  "options": {},
+  "attributes": {
+    "interestRate": {
+      "type": "string"
+    },
+    "commission": {
+      "type": "string"
+    },
+    "taeg": {
+      "type": "decimal"
+    },
+    "requestDate": {
+      "type": "date"
+    },
+    "lastDueDate": {
+      "type": "date"
+    },
+    "requestStatus": {
+      "type": "enumeration",
+      "enum": ["Validé", "En attente"],
+      "default": "En attente"
+    }
+  }
+}

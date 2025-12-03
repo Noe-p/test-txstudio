@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_loan_state_infos",
+  "info": {
+    "displayName": "State Info"
+  },
+  "options": {},
+  "attributes": {
+    "subtitle": {
+      "type": "string"
+    },
+    "currentAmount": {
+      "type": "decimal"
+    },
+    "statusGroup": {
+      "type": "enumeration",
+      "enum": ["Prêt validé", "En attente", "Clôturé"]
+    }
+  }
+}
