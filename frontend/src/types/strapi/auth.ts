@@ -1,3 +1,5 @@
+import { MediaType } from './media';
+
 export interface User {
   id: number;
   username: string;
@@ -6,6 +8,9 @@ export interface User {
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
+  lastName?: string;
+  address?: string;
+  profilePicture?: MediaType;
 }
 
 export interface LoginCredentials {

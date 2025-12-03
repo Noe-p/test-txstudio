@@ -6,6 +6,7 @@ export const STRAPI_ROUTES = {
   singleTypes: {
     header: '/api/header',
     configuration: '/api/configuration',
+    dashboard: '/api/dashboard',
   },
   collectionTypes: {
     advantages: '/api/advantages',

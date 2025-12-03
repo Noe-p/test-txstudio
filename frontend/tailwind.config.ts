@@ -168,6 +168,7 @@ const colors = {
     DEFAULT: 'hsl(var(--success))',
     foreground: 'hsl(var(--success-foreground))',
   },
+  'tab-active': 'hsl(var(--tab-active))',
   popover: {
     DEFAULT: 'hsl(var(--popover))',
     foreground: 'hsl(var(--popover-foreground))',

@@ -3,6 +3,7 @@ import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
 import { AdvantagesResponse, AdvantageType } from '@/types/strapi/collectionTypes/advantage';
 import { ServicesResponse, ServiceType } from '@/types/strapi/collectionTypes/service';
 import { ConfigurationResponse, ConfigurationType } from '@/types/strapi/singleTypes/configuration';
+import { DashboardResponse, DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { HeaderResponse, HeaderType } from '@/types/strapi/singleTypes/header';
 import { HttpService } from './httpService';
 
@@ -13,8 +14,17 @@ export const strapiApi = {
       return response.data;
     },
     me: async (): Promise<User> => {
-      const response = await HttpService.get<User>(STRAPI_ROUTES.auth.me);
-      return response.data;
+      // D'abord récupérer l'ID de l'utilisateur
+      const meResponse = await HttpService.get<User>(STRAPI_ROUTES.auth.me);
+      const userId = meResponse.data.id;
+
+      // Ensuite récupérer l'utilisateur complet avec populate
+      const userResponse = await HttpService.get<User>(`/api/users/${userId}`, {
+        params: {
+          populate: 'profilePicture',
+        },
+      });
+      return userResponse.data;
     },
   },
   configuration: {
@@ -37,6 +47,14 @@ export const strapiApi = {
           populate: 'header',
         },
       });
+      return response.data.data;
+    },
+  },
+  dashboard: {
+    get: async (): Promise<DashboardType> => {
+      const response = await HttpService.get<DashboardResponse>(
+        STRAPI_ROUTES.singleTypes.dashboard,
+      );
       return response.data.data;
     },
   },

@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import {
   Sidebar,
@@ -16,10 +16,11 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { useAppContext } from '@/contexts';
-import { useIsAuthenticated, useUser } from '@/hooks/useAuth';
+import { useIsAuthenticated } from '@/hooks/useAuth';
 import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
+import { User } from '@/types/strapi/auth';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { ArrowLeftRight, Bell, Home, LifeBuoy, Settings, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -41,8 +42,24 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
   const isAuthenticated = useIsAuthenticated();
   const router = useRouter();
   const { setLogoUrl } = useAppContext();
-  const user = useUser();
+  const [user, setUser] = React.useState<User | null>(null);
   const t = useTranslations('common');
+
+  // Charger l'utilisateur côté client uniquement
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        try {
+          setUser(JSON.parse(userStr) as User);
+        } catch {
+          setUser(null);
+        }
+      }
+    }
+  }, []);
+
+  console.log('User in UserLayout:', user);
 
   useEffect(() => {
     const logoUrl = configurationData?.logo?.url
@@ -66,7 +83,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
       {
         icon: Home,
         label: t('dashboard.sidebar.dashboard'),
-        href: user ? ROUTES.user.dashboard : '#',
+        href: ROUTES.user.dashboard,
         disabled: false,
       },
       {
@@ -88,7 +105,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
         disabled: true,
       },
     ],
-    [user, t],
+    [t],
   );
 
   const bottomMenuItems = useMemo(
@@ -109,16 +126,6 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
     ],
     [t],
   );
-
-  const getUserInitials = (username?: string) => {
-    if (!username) return 'U';
-    return username
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2);
-  };
 
   return (
     <SidebarProvider>
@@ -194,27 +201,37 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
           <SidebarFooter className="px-6 py-4">
             <Row className="gap-3 items-center">
               <Avatar className="h-10 w-10">
-                <AvatarFallback className="bg-primary text-primary-foreground">
-                  {getUserInitials(user?.username)}
+                {user?.profilePicture?.url && (
+                  <AvatarImage
+                    src={`${process.env.NEXT_PUBLIC_API_URL}${user.profilePicture.url}`}
+                    alt={user.username}
+                  />
+                )}
+                <AvatarFallback
+                  className="bg-primary text-primary-foreground"
+                  username={user?.username}
+                >
+                  {'?'}
                 </AvatarFallback>
               </Avatar>
               <Col className=" flex-1 min-w-0">
-                <P14 className="font-bold truncate">{user?.username || t('user.loading')}</P14>
+                <P14 className="font-bold truncate" suppressHydrationWarning>
+                  {`${user?.username ?? t('user.loading')} ${user?.lastName ?? ''}`}
+                </P14>
                 <Row className="gap-2 items-center">
                   <P10 className="text-muted-foreground truncate">
                     {t('dashboard.sidebar.kycStatus')}
                     {':'}
                   </P10>
-                  {user && (
-                    <Badge
-                      variant={user.confirmed ? 'default' : 'destructive'}
-                      className="text-xs px-2 py-0"
-                    >
-                      {user.confirmed
-                        ? t('dashboard.sidebar.kycValid')
-                        : t('dashboard.sidebar.kycInvalid')}
-                    </Badge>
-                  )}
+                  <Badge
+                    variant={user?.confirmed ? 'default' : 'destructive'}
+                    className="text-xs px-2 py-0"
+                    suppressHydrationWarning
+                  >
+                    {user?.confirmed
+                      ? t('dashboard.sidebar.kycValid')
+                      : t('dashboard.sidebar.kycInvalid')}
+                  </Badge>
                 </Row>
               </Col>
             </Row>

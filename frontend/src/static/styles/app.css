@@ -27,6 +27,9 @@
     --muted: 220 20% 96%;
     --muted-foreground: 220 8% 45%;
 
+    /* Tab Active */
+    --tab-active: 232 76% 90%;
+
     /* Accent */
     --accent: 217 92% 65%;
     --accent-foreground: 0 0% 100%;

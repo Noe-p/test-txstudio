@@ -38,7 +38,7 @@
     "dashboard": "Voir le Dashboard"
   },
   "user": {
-    "welcome": "Bienvenue, {username}!",
+    "welcome": "Bonjour {username} !",
     "loading": "Chargement...",
     "accountStatus": "Compte {status}",
     "confirmed": "confirmé",
@@ -55,6 +55,18 @@
       "kycStatus": "Statut Vérification KYC",
       "kycValid": "Validé",
       "kycInvalid": "Non validé"
+    },
+    "tabs": {
+      "loans": "Mes prêts",
+      "invoices": "Mes factures"
+    },
+    "requestFunding": "Demander un financement",
+    "myAccount": "Mon compte",
+    "cards": {
+      "segment": "Segment",
+      "riskAssessment": "Évaluation des risques",
+      "riskScore": "Score risque",
+      "lastTransaction": "Montant dernière transaction"
     }
   }
 }

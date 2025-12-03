@@ -2,8 +2,9 @@ import { ROUTES } from '@/services/routes';
 import { strapiApi } from '@/services/strapi/api';
 import { HttpService } from '@/services/strapi/httpService';
 import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export const useLogin = () => {
   const router = useRouter();
@@ -59,4 +60,28 @@ export const useUser = () => {
 export const useIsAuthenticated = () => {
   if (typeof window === 'undefined') return false;
   return !!localStorage.getItem('jwt');
+};
+
+// Hook pour récupérer l'utilisateur complet avec profilePicture depuis l'API
+export const useAuthUser = () => {
+  const [mounted, setMounted] = useState(false);
+  const localUser = useUser();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return useQuery<User>({
+    queryKey: ['auth-user'],
+    queryFn: async () => {
+      const userData = await strapiApi.auth.me();
+      // Mettre à jour le localStorage avec les données complètes
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('user', JSON.stringify(userData));
+      }
+      return userData;
+    },
+    enabled: mounted && !!localUser,
+    ...(localUser && { initialData: localUser }),
+  });
 };

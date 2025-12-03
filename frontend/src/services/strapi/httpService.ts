@@ -19,6 +19,14 @@ class HTTPService {
       ? +process.env.NEXT_PUBLIC_API_TIMEOUT
       : 60000;
     this.token = '';
+
+    // Initialiser le token depuis le localStorage au démarrage
+    if (typeof window !== 'undefined') {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        this.token = jwt;
+      }
+    }
   }
 
   public setToken(token: string): void {

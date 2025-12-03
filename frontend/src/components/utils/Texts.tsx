@@ -18,7 +18,7 @@ export function H1({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLHeadingElement>) {
   return (
-    <h1 className={cn('scroll-m-20 text-4xl font-bold tracking-tight', className)} {...props}>
+    <h1 className={cn('scroll-m-20  text-4xl font-bold tracking-tight', className)} {...props}>
       {children}
     </h1>
   );

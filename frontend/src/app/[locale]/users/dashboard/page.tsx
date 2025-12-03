@@ -2,6 +2,8 @@
 import { DashboardPage } from '@/components/pages/User/DashboardPage';
 import { strapiApi } from '@/services/strapi/api';
 
+export const dynamic = 'force-dynamic'; // Rendre la page dynamique
+
 export async function generateStaticParams() {
   return [];
 }
