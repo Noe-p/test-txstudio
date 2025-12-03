@@ -13,9 +13,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { useAppContext } from '@/contexts';
 import { useIsAuthenticated, useUser } from '@/hooks/useAuth';
+import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
@@ -64,7 +66,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
       {
         icon: Home,
         label: t('dashboard.sidebar.dashboard'),
-        href: user ? `/users/${user.username}` : '#',
+        href: user ? ROUTES.user.dashboard : '#',
         disabled: false,
       },
       {
@@ -220,6 +222,16 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
         </Sidebar>
 
         <div className="flex-1 flex flex-col bg-secondary">
+          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:hidden">
+            <SidebarTrigger />
+            <Image
+              src={logoUrl}
+              alt="Logo"
+              width={120}
+              height={32}
+              className="h-8 w-auto object-contain"
+            />
+          </header>
           <main className={cn('flex-1 overflow-auto', className)}>{children}</main>
         </div>
       </div>
