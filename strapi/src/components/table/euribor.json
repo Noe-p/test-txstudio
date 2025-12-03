@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_table_euribors",
+  "info": {
+    "displayName": "euribor",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "tenor": {
+      "type": "string"
+    },
+    "marketPlace": {
+      "type": "decimal"
+    },
+    "marketRiskFreeDate": {
+      "type": "decimal"
+    },
+    "marketRiskFreePremium": {
+      "type": "decimal"
+    },
+    "change": {
+      "type": "decimal"
+    },
+    "variation": {
+      "type": "decimal"
+    }
+  },
+  "config": {}
+}

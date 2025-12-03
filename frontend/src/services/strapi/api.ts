@@ -4,6 +4,7 @@ import { AdvantagesResponse, AdvantageType } from '@/types/strapi/collectionType
 import { ServicesResponse, ServiceType } from '@/types/strapi/collectionTypes/service';
 import { ConfigurationResponse, ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { DashboardResponse, DashboardType } from '@/types/strapi/singleTypes/dashboard';
+import { EuriborResponse, EuriborType } from '@/types/strapi/singleTypes/euribor';
 import { HeaderResponse, HeaderType } from '@/types/strapi/singleTypes/header';
 import { HttpService } from './httpService';
 
@@ -55,6 +56,16 @@ export const strapiApi = {
       const response = await HttpService.get<DashboardResponse>(
         STRAPI_ROUTES.singleTypes.dashboard,
       );
+      return response.data.data;
+    },
+  },
+  euribor: {
+    get: async (): Promise<EuriborType> => {
+      const response = await HttpService.get<EuriborResponse>(STRAPI_ROUTES.singleTypes.euribor, {
+        params: {
+          populate: '*',
+        },
+      });
       return response.data.data;
     },
   },

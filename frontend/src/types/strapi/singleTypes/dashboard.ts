@@ -12,18 +12,10 @@ export interface DashboardType extends Generic {
     chartData: FinancialGraphDataPoint[];
     seriesNames: FinancialGraphSeriesNames;
   };
-  euriborData: Record<string, EuriborData[]>;
 }
 
 export interface DashboardResponse {
   data: DashboardType;
 }
 
-export interface EuriborData {
-  tenor: string;
-  marketPlace: string;
-  marketRiskFreeDate: string;
-  marketRiskFreePremium: string;
-  change: string;
-  variation: string;
-}
+// Euribor data moved to its own single type: see singleTypes/euribor.ts

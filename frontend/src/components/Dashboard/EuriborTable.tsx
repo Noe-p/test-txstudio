@@ -1,11 +1,19 @@
-import { EuriborData } from '@/types/strapi/singleTypes/dashboard';
+import { EuriborData } from '@/types/strapi/singleTypes/euribor';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Col } from '../utils/Flex';
 import { P12 } from '../utils/Texts';
 
 interface EuriborTableProps {
-  data?: Record<string, EuriborData[]> | null | undefined;
+  data?:
+    | {
+        euribor1w?: EuriborData[];
+        euribor2w?: EuriborData[];
+        euribor3w?: EuriborData[];
+        average?: EuriborData[];
+      }
+    | null
+    | undefined;
 }
 
 export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {

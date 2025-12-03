@@ -502,7 +502,6 @@ export interface ApiDashboardDashboard extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    euriborData: Schema.Attribute.JSON;
     financialGraphData: Schema.Attribute.JSON;
     lastTransaction: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -516,6 +515,37 @@ export interface ApiDashboardDashboard extends Struct.SingleTypeSchema {
       ['A-Aucun risques', 'B-Risques faible', 'C-Risques \u00E9lev\u00E9']
     >;
     segment: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEuriborTableEuriborTable extends Struct.SingleTypeSchema {
+  collectionName: 'euribor_tables';
+  info: {
+    displayName: 'EuriborTable';
+    pluralName: 'euribor-tables';
+    singularName: 'euribor-table';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    averageSectorSpread: Schema.Attribute.Component<'table.euribor', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    euribor1w: Schema.Attribute.Component<'table.euribor', true>;
+    euribor2w: Schema.Attribute.Component<'table.euribor', true>;
+    euribor3w: Schema.Attribute.Component<'table.euribor', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::euribor-table.euribor-table'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1100,6 +1130,7 @@ declare module '@strapi/strapi' {
       'api::advantage.advantage': ApiAdvantageAdvantage;
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::dashboard.dashboard': ApiDashboardDashboard;
+      'api::euribor-table.euribor-table': ApiEuriborTableEuriborTable;
       'api::header.header': ApiHeaderHeader;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;

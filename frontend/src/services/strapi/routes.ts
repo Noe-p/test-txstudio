@@ -7,6 +7,7 @@ export const STRAPI_ROUTES = {
     header: '/api/header',
     configuration: '/api/configuration',
     dashboard: '/api/dashboard',
+    euribor: '/api/euribor-table',
   },
   collectionTypes: {
     advantages: '/api/advantages',

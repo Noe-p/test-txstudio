@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "euribor_tables",
+  "info": {
+    "singularName": "euribor-table",
+    "pluralName": "euribor-tables",
+    "displayName": "EuriborTable"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "euribor1w": {
+      "type": "component",
+      "component": "table.euribor",
+      "repeatable": true
+    },
+    "euribor2w": {
+      "type": "component",
+      "component": "table.euribor",
+      "repeatable": true
+    },
+    "euribor3w": {
+      "type": "component",
+      "component": "table.euribor",
+      "repeatable": true
+    },
+    "averageSectorSpread": {
+      "type": "component",
+      "component": "table.euribor",
+      "repeatable": true
+    }
+  }
+}
