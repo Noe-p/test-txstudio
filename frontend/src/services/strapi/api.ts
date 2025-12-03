@@ -1,6 +1,7 @@
 import { STRAPI_ROUTES } from '@/services/strapi/routes';
 import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
 import { AdvantagesResponse, AdvantageType } from '@/types/strapi/collectionTypes/advantage';
+import { LoansResponse, LoanType } from '@/types/strapi/collectionTypes/loan';
 import { ServicesResponse, ServiceType } from '@/types/strapi/collectionTypes/service';
 import { ConfigurationResponse, ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { DashboardResponse, DashboardType } from '@/types/strapi/singleTypes/dashboard';
@@ -92,6 +93,16 @@ export const strapiApi = {
           },
         },
       );
+      return response.data.data;
+    },
+  },
+  loans: {
+    getAll: async (): Promise<LoanType[]> => {
+      const response = await HttpService.get<LoansResponse>(STRAPI_ROUTES.collectionTypes.loans, {
+        params: {
+          populate: '*',
+        },
+      });
       return response.data.data;
     },
   },

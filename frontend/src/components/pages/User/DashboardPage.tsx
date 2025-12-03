@@ -114,7 +114,7 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
                 </TabsList>
 
                 <TabsContent value="active">
-                  <TransactionTab dashboardData={dashboardData ?? null} />
+                  <TransactionTab />
                 </TabsContent>
                 <TabsContent value="pending">
                   <div className="p-4 text-muted-foreground">

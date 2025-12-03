@@ -42,24 +42,24 @@ export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Tenor</TableHead>
-                    <TableHead>Market Place</TableHead>
+                    <TableHead>{'Tenor'}</TableHead>
+                    <TableHead>{'Market Place'}</TableHead>
                     <TableHead>
                       <div className="leading-tight">
-                        Market Risk Free
+                        {'Market Risk Free'}
                         <br />
-                        <span className="font-normal">Date</span>
+                        <span className="font-normal">{'Date'}</span>
                       </div>
                     </TableHead>
                     <TableHead>
                       <div className="leading-tight">
-                        Market Risk Free
+                        {'Market Risk Free'}
                         <br />
-                        <span className="font-normal">Premium</span>
+                        <span className="font-normal">{'Premium'}</span>
                       </div>
                     </TableHead>
-                    <TableHead>Change %</TableHead>
-                    <TableHead>Variation</TableHead>
+                    <TableHead>{'Change %'}</TableHead>
+                    <TableHead>{'Variation'}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>

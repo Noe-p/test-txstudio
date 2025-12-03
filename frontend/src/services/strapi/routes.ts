@@ -12,5 +12,6 @@ export const STRAPI_ROUTES = {
   collectionTypes: {
     advantages: '/api/advantages',
     services: '/api/services',
+    loans: '/api/loans',
   },
 };
