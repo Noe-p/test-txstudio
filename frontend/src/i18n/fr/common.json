@@ -60,9 +60,18 @@
       "loans": "Mes prêts",
       "invoices": "Mes factures"
     },
+    "transactionsSection": {
+      "title": "Transactions",
+      "statuses": {
+        "active": "Actifs",
+        "pending": "En attente ({count})",
+        "closed": "Clos"
+      }
+    },
     "requestFunding": "Demander un financement",
     "myAccount": "Mon compte",
     "infos": "Informations financières",
+    "transactions": "Transactions",
     "cards": {
       "segment": "Segment",
       "riskAssessment": "Évaluation des risques",

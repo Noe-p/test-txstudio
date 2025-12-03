@@ -1,5 +1,6 @@
 'use client';
 import { LoansTab } from '@/components/Dashboard/LoansTab';
+import { TransactionTab } from '@/components/Dashboard/TransactionTab';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,7 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { Col, RowBetween } from '../../utils/Flex';
-import { H1 } from '../../utils/Texts';
+import { H1, H3 } from '../../utils/Texts';
 import { UserLayout } from '../../utils/UserLayout';
 
 interface DashboardPageProps {
@@ -87,6 +88,45 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
                   </TabsContent>
                 </Tabs>
               </RowBetween>
+            </Col>
+            <Col className="gap-3 w-full">
+              <H3>{t('dashboard.transactionsSection.title')}</H3>
+              <Tabs defaultValue="active" className="w-full">
+                <TabsList className="w-fit">
+                  <TabsTrigger
+                    value="active"
+                    className="data-[state=active]:bg-success data-[state=active]:text-primary-foreground"
+                  >
+                    {t('dashboard.transactionsSection.statuses.active')}
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="pending"
+                    className="data-[state=active]:bg-success data-[state=active]:text-primary-foreground"
+                  >
+                    {t('dashboard.transactionsSection.statuses.pending', { count: 1 })}
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="closed"
+                    className="data-[state=active]:bg-success data-[state=active]:text-primary-foreground"
+                  >
+                    {t('dashboard.transactionsSection.statuses.closed')}
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="active">
+                  <TransactionTab dashboardData={dashboardData ?? null} />
+                </TabsContent>
+                <TabsContent value="pending">
+                  <div className="p-4 text-muted-foreground">
+                    {'Aucune opération en attente pour le moment.'}
+                  </div>
+                </TabsContent>
+                <TabsContent value="closed">
+                  <div className="p-4 text-muted-foreground">
+                    {'Historique des opérations clôturées prochainement disponible.'}
+                  </div>
+                </TabsContent>
+              </Tabs>
             </Col>
           </Col>
         ) : (

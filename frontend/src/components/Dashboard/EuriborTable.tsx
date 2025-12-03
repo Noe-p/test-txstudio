@@ -4,11 +4,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Col } from '../utils/Flex';
 import { P12 } from '../utils/Texts';
 
-interface EuriborTabProps {
+interface EuriborTableProps {
   data?: Record<string, EuriborData[]> | null | undefined;
 }
 
-export function EuriborTab({ data }: EuriborTabProps): React.JSX.Element {
+export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
   const euriborData = data ?? {};
   return (
     <Col className="gap-4 bg-card rounded-lg p-6">
