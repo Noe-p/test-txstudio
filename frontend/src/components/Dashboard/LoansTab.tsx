@@ -8,6 +8,7 @@ import { FinancialGraph } from '../Charts/FinancialGraph';
 import { Col, Row } from '../utils/Flex';
 import { H2, H3, P10, P16 } from '../utils/Texts';
 import { DashboardCard } from './DashboardCard';
+import { EuriborTab } from './EuriborTab';
 import { RiskScoreGradient } from './RiskScoreGradient';
 
 interface LoansTabProps {
@@ -94,12 +95,19 @@ export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
       {/* Informations */}
       <Col className="gap-3 w-full">
         <H3>{t('dashboard.infos')}</H3>
-        {dashboardData?.financialGraphData && (
-          <FinancialGraph
-            data={dashboardData?.financialGraphData?.chartData}
-            seriesNames={dashboardData?.financialGraphData?.seriesNames}
-          />
-        )}
+        <div className="grid md:grid-cols-5 grid-cols-1 gap-5 w-full items-start">
+          {dashboardData?.financialGraphData && (
+            <div className="md:col-span-2">
+              <FinancialGraph
+                data={dashboardData?.financialGraphData?.chartData}
+                seriesNames={dashboardData?.financialGraphData?.seriesNames}
+              />
+            </div>
+          )}
+          <div className="md:col-span-3">
+            <EuriborTab data={dashboardData?.euriborData} />
+          </div>
+        </div>
       </Col>
     </Col>
   );

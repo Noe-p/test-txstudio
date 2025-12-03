@@ -27,6 +27,9 @@
         },
         "financialGraphData": {
             "type": "json"
+        },
+        "euriborData": {
+            "type": "json"
         }
     }
 }

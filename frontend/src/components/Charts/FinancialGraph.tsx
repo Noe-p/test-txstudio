@@ -80,7 +80,7 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
   };
 
   return (
-    <Col className="w-full h-[400px] bg-background p-4 rounded-lg relative">
+    <Col className="w-full h-[300px] bg-background py-4 rounded-lg relative">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           {/* Ligne horizontale au hover */}
@@ -227,15 +227,15 @@ export function FinancialGraph({ data, seriesNames }: FinancialGraphProps): Reac
       <div className=" flex justify-center gap-8 mt-6">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded bg-emerald-500" />
-          <span className="text-sm">{seriesNames.serie1}</span>
+          <span className="text-xs">{seriesNames.serie1}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded bg-cyan-500" />
-          <span className="text-sm">{seriesNames.serie2}</span>
+          <span className="text-xs">{seriesNames.serie2}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 rounded bg-orange-500" />
-          <span className="text-sm">{seriesNames.serie3}</span>
+          <span className="text-xs">{seriesNames.serie3}</span>
         </div>
       </div>
     </Col>

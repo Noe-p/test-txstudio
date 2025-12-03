@@ -247,7 +247,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
               className="h-8 w-auto object-contain"
             />
           </header>
-          <main className={cn('flex-1 overflow-auto p-10 pb-30', className)}>{children}</main>
+          <main className={cn('flex-1 overflow-auto p-8 pb-30', className)}>{children}</main>
         </div>
       </div>
     </SidebarProvider>
