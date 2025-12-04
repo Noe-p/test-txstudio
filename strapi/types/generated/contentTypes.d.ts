@@ -461,7 +461,7 @@ export interface ApiConfigurationConfiguration extends Struct.SingleTypeSchema {
 export interface ApiDashboardDashboard extends Struct.SingleTypeSchema {
   collectionName: 'dashboards';
   info: {
-    displayName: 'Dashboard';
+    displayName: 'DashboardPage';
     pluralName: 'dashboards';
     singularName: 'dashboard';
   };
@@ -472,8 +472,10 @@ export interface ApiDashboardDashboard extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    euribors: Schema.Attribute.Relation<'oneToMany', 'api::euribor.euribor'>;
     financialGraphData: Schema.Attribute.JSON;
     lastTransaction: Schema.Attribute.String;
+    loans: Schema.Attribute.Relation<'oneToMany', 'api::loan.loan'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -491,31 +493,29 @@ export interface ApiDashboardDashboard extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiEuriborTableEuriborTable extends Struct.SingleTypeSchema {
-  collectionName: 'euribor_tables';
+export interface ApiEuriborEuribor extends Struct.CollectionTypeSchema {
+  collectionName: 'euribors';
   info: {
-    displayName: 'EuriborTable';
-    pluralName: 'euribor-tables';
-    singularName: 'euribor-table';
+    displayName: 'Euribor';
+    pluralName: 'euribors';
+    singularName: 'euribor';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    averageSectorSpread: Schema.Attribute.Component<'table.euribor', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    euribor1w: Schema.Attribute.Component<'table.euribor', true>;
-    euribor2w: Schema.Attribute.Component<'table.euribor', true>;
-    euribor3w: Schema.Attribute.Component<'table.euribor', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::euribor-table.euribor-table'
+      'api::euribor.euribor'
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    table: Schema.Attribute.Component<'table.euribor', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1107,7 +1107,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::dashboard.dashboard': ApiDashboardDashboard;
-      'api::euribor-table.euribor-table': ApiEuriborTableEuriborTable;
+      'api::euribor.euribor': ApiEuriborEuribor;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::loan.loan': ApiLoanLoan;
       'plugin::content-releases.release': PluginContentReleasesRelease;

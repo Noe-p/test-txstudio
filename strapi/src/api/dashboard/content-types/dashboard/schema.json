@@ -4,7 +4,7 @@
   "info": {
     "singularName": "dashboard",
     "pluralName": "dashboards",
-    "displayName": "Dashboard"
+    "displayName": "DashboardPage"
   },
   "options": {
     "draftAndPublish": true
@@ -27,6 +27,16 @@
     },
     "financialGraphData": {
       "type": "json"
+    },
+    "loans": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::loan.loan"
+    },
+    "euribors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::euribor.euribor"
     }
   }
 }
