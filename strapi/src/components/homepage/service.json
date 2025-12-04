@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_homepage_services",
+  "info": {
+    "displayName": "Service"
+  },
+  "options": {},
+  "attributes": {
+    "nav": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "button": {
+      "type": "component",
+      "component": "cta.link-button",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
