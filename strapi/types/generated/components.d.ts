@@ -12,6 +12,44 @@ export interface CtaLinkButton extends Struct.ComponentSchema {
   };
 }
 
+export interface HomepageAdvantage extends Struct.ComponentSchema {
+  collectionName: 'components_homepage_advantages';
+  info: {
+    displayName: 'Advantage';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    icon: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HomepageHeader extends Struct.ComponentSchema {
+  collectionName: 'components_homepage_headers';
+  info: {
+    displayName: 'Header';
+  };
+  attributes: {
+    headerImage: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    subTitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    upTitle: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HomepageService extends Struct.ComponentSchema {
+  collectionName: 'components_homepage_services';
+  info: {
+    displayName: 'Service';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'cta.link-button', false>;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    nav: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface LoanBorrowerInfo extends Struct.ComponentSchema {
   collectionName: 'components_loan_borrower_infos';
   info: {
@@ -100,6 +138,9 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'cta.link-button': CtaLinkButton;
+      'homepage.advantage': HomepageAdvantage;
+      'homepage.header': HomepageHeader;
+      'homepage.service': HomepageService;
       'loan.borrower-info': LoanBorrowerInfo;
       'loan.financial-info': LoanFinancialInfo;
       'loan.state-info': LoanStateInfo;

@@ -1,7 +1,7 @@
-import { AdvantageType } from '@/types/strapi/collectionTypes/advantage';
-import { ServiceType } from '@/types/strapi/collectionTypes/service';
+import { AdvantageType } from '@/types/strapi/componentTypes/advantage';
+import { HeaderType } from '@/types/strapi/componentTypes/header';
+import { ServiceType } from '@/types/strapi/componentTypes/service';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
-import { HeaderType } from '@/types/strapi/singleTypes/header';
 import React from 'react';
 import { Advantages } from '../Homepage/Advantages';
 import { Header } from '../Homepage/Header';

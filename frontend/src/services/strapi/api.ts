@@ -1,12 +1,10 @@
 import { STRAPI_ROUTES } from '@/services/strapi/routes';
 import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
-import { AdvantagesResponse, AdvantageType } from '@/types/strapi/collectionTypes/advantage';
 import { LoansResponse, LoanType } from '@/types/strapi/collectionTypes/loan';
-import { ServicesResponse, ServiceType } from '@/types/strapi/collectionTypes/service';
 import { ConfigurationResponse, ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { DashboardResponse, DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { EuriborResponse, EuriborType } from '@/types/strapi/singleTypes/euribor';
-import { HeaderResponse, HeaderType } from '@/types/strapi/singleTypes/header';
+import { HomePageResponse, HomePageType } from '@/types/strapi/singleTypes/homePage';
 import { HttpService } from './httpService';
 
 export const strapiApi = {
@@ -29,26 +27,30 @@ export const strapiApi = {
       return userResponse.data;
     },
   },
-  configuration: {
-    get: async (): Promise<ConfigurationType> => {
-      const response = await HttpService.get<ConfigurationResponse>(
-        STRAPI_ROUTES.singleTypes.configuration,
-        {
-          params: {
-            populate: 'logo',
+  homePage: {
+    get: async (): Promise<HomePageType> => {
+      const response = await HttpService.get<HomePageResponse>(STRAPI_ROUTES.singleTypes.homePage, {
+        params: {
+          populate: {
+            Header: { populate: 'headerImage' },
+            Advantage: { populate: 'icon' },
+            Service: { populate: 'button' },
           },
         },
-      );
+      });
       return response.data.data;
     },
   },
-  header: {
-    get: async (): Promise<HeaderType> => {
-      const response = await HttpService.get<HeaderResponse>(STRAPI_ROUTES.singleTypes.header, {
-        params: {
-          populate: 'header',
+  configuration: {
+    get: async (): Promise<ConfigurationType> => {
+      const response = await HttpService.get<ConfigurationResponse>(
+        STRAPI_ROUTES.configuration.get,
+        {
+          params: {
+            populate: '*',
+          },
         },
-      });
+      );
       return response.data.data;
     },
   },
@@ -67,32 +69,6 @@ export const strapiApi = {
           populate: '*',
         },
       });
-      return response.data.data;
-    },
-  },
-  advantages: {
-    getAll: async (): Promise<AdvantageType[]> => {
-      const response = await HttpService.get<AdvantagesResponse>(
-        STRAPI_ROUTES.collectionTypes.advantages,
-        {
-          params: {
-            populate: 'icon',
-          },
-        },
-      );
-      return response.data.data;
-    },
-  },
-  services: {
-    getAll: async (): Promise<ServiceType[]> => {
-      const response = await HttpService.get<ServicesResponse>(
-        STRAPI_ROUTES.collectionTypes.services,
-        {
-          params: {
-            populate: 'button',
-          },
-        },
-      );
       return response.data.data;
     },
   },

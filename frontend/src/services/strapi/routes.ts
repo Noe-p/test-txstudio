@@ -4,14 +4,14 @@ export const STRAPI_ROUTES = {
     me: '/api/users/me',
   },
   singleTypes: {
-    header: '/api/header',
-    configuration: '/api/configuration',
+    homePage: '/api/home-page',
     dashboard: '/api/dashboard',
     euribor: '/api/euribor-table',
   },
   collectionTypes: {
-    advantages: '/api/advantages',
-    services: '/api/services',
     loans: '/api/loans',
+  },
+  configuration: {
+    get: '/api/configuration',
   },
 };

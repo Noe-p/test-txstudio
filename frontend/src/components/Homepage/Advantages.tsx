@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Col } from '@/components/utils/Flex';
 import { Grid2 } from '@/components/utils/Grid';
 import { P14 } from '@/components/utils/Texts';
-import { AdvantageType } from '@/types/strapi/collectionTypes/advantage';
+import { AdvantageType } from '@/types/strapi/componentTypes/advantage';
 
 interface AdvantagesProps {
   data: AdvantageType[] | null;

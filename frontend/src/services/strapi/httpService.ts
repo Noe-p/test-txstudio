@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import qs from 'qs';
 
 interface HttpError extends Error {
   data?: unknown;
@@ -113,6 +114,7 @@ class HTTPService {
       validateStatus: (status: number) => status >= 200 && status < 500,
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
+      paramsSerializer: (params) => qs.stringify(params, { encodeValuesOnly: true }),
     });
   }
 

@@ -45,12 +45,12 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
             />
           </Link>
           <RowCenter className="gap-10 hidden md:flex">
-            <Link href="/pret">
+            <Link href="#">
               <P16 className="hover:text-primary transition-colors cursor-pointer">
                 {t('navbar.loan')}
               </P16>
             </Link>
-            <Link href="/affacturage">
+            <Link href="#">
               <P16 className="hover:text-primary transition-colors cursor-pointer">
                 {t('navbar.factoring')}
               </P16>
@@ -60,17 +60,17 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
 
         <RowCenter className="gap-18">
           <RowCenter className="gap-10 hidden lg:flex">
-            <Link href="/simulateur">
+            <Link href="#">
               <P16 className="hover:text-primary transition-colors cursor-pointer">
                 {t('navbar.simulator')}
               </P16>
             </Link>
-            <Link href="/contact">
+            <Link href="#">
               <P16 className="hover:text-primary transition-colors cursor-pointer">
                 {t('navbar.contact')}
               </P16>
             </Link>
-            <Link href="/publications">
+            <Link href="#">
               <P16 className="hover:text-primary transition-colors cursor-pointer">
                 {t('navbar.publications')}
               </P16>

@@ -6,7 +6,3 @@ export interface AdvantageType extends Generic {
   description: string;
   icon: MediaType;
 }
-
-export interface AdvantagesResponse {
-  data: AdvantageType[];
-}

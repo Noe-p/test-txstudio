@@ -7,41 +7,26 @@ export async function generateStaticParams() {
 }
 
 export default async function Page(): Promise<React.JSX.Element> {
-  let headerData = null;
-  let advantagesData = null;
-  let servicesData = null;
+  let homePageData = null;
   let configurationData = null;
 
+  try {
+    homePageData = await strapiApi.homePage.get();
+  } catch (error) {
+    console.error('Failed to fetch homepage data:', error);
+  }
   try {
     configurationData = await strapiApi.configuration.get();
   } catch (error) {
     console.error('Failed to fetch configuration data:', error);
   }
 
-  try {
-    headerData = await strapiApi.header.get();
-  } catch (error) {
-    console.error('Failed to fetch header data:', error);
-  }
-
-  try {
-    advantagesData = await strapiApi.advantages.getAll();
-  } catch (error) {
-    console.error('Failed to fetch advantages data:', error);
-  }
-
-  try {
-    servicesData = await strapiApi.services.getAll();
-  } catch (error) {
-    console.error('Failed to fetch services data:', error);
-  }
-
   return (
     <HomePage
-      headerData={headerData}
-      advantagesData={advantagesData}
-      servicesData={servicesData}
-      configurationData={configurationData}
+      headerData={homePageData?.Header || null}
+      advantagesData={homePageData?.Advantage || null}
+      servicesData={homePageData?.Service || null}
+      configurationData={configurationData || null}
     />
   );
 }

@@ -5,7 +5,7 @@ import { Col } from '@/components/utils/Flex';
 import { Grid2 } from '@/components/utils/Grid';
 import { P24 } from '@/components/utils/Texts';
 import { cn } from '@/services/utils';
-import { ServiceType } from '@/types/strapi/collectionTypes/service';
+import { ServiceType } from '@/types/strapi/componentTypes/service';
 import { MoveRight } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';

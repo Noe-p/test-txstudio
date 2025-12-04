@@ -1,7 +1,7 @@
 'use client';
 import { useUser } from '@/hooks/useAuth';
 import { ROUTES } from '@/services/routes';
-import { HeaderType } from '@/types/strapi/singleTypes/header';
+import { HeaderType } from '@/types/strapi/componentTypes/header';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ export function Header({ data }: HeaderProps): React.JSX.Element {
   }
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337';
-  const imageUrl = data.header?.url ? `${apiUrl}${data.header.url}` : null;
+  const imageUrl = data.headerImage?.url ? `${apiUrl}${data.headerImage.url}` : null;
 
   return (
     <header className="w-full h-screen relative overflow-hidden">
@@ -35,7 +35,7 @@ export function Header({ data }: HeaderProps): React.JSX.Element {
             <Col className="gap-4">
               <P14 className="text-primary font-bold uppercase tracking-wide">{data.upTitle}</P14>
               <Title>{data.title}</Title>
-              <P14 className="text-muted-foreground">{data.subtitle}</P14>
+              <P14 className="text-muted-foreground">{data.subTitle}</P14>
             </Col>
 
             {/* Boutons */}
