@@ -29,10 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 bun-debug.log*
 
-# local env files
-frontend/.env
-frontend/.env*.local
-frontend/.env.production
+
 
 # vercel
 frontend/.vercel
@@ -56,8 +53,7 @@ strapi/node_modules/
 strapi/.cache/
 strapi/.tmp/
 strapi/build/
-strapi/.env
-strapi/.env*.local
+
 strapi/public/uploads/
 strapi/.strapi-updater.json
 strapi/database/data/
