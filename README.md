@@ -8,6 +8,8 @@ J'ai fait de mon mieux pour respecter toutes les fonctionnalités demandées et 
 
 **Note** : J'ai push les fichiers `.env` dans le dépôt, c'est pas une erreur, c'était histoire de facilliter l'installation. 😄
 
+Si vous rencontrez le moindre problème lors de l'installation, n'hésitez pas à me contacter !
+
 ---
 
 ## 🚀 Démarrage rapide
@@ -16,7 +18,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 
 ### Prérequis
 
-- **Docker** (pour les conteneurs)
+- **Docker** (pour la db postgres)
 - **Make** (pour les commandes automatisées)
 - **Git** (pour cloner le projet)
 - **Bun** et **npm** (gestionnaires de packages)
@@ -26,8 +28,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
 1. **Cloner le dépôt**
 
    ```bash
-   git clone git@github.com:Noe-p/test-txstudio.git
-   cd test-txstudio
+   git clone git@github.com:Noe-p/test-txstudio.git && cd test-txstudio
    ```
 
 2. **Installer les dépendances**
@@ -48,7 +49,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
    make dev.strapi
    ```
 
-   Répondre 'Yes' à ce message :
+   Répondre **'Yes'** à ce message :
 
    > The import will delete your existing data! Are you sure you want to proceed?
 
@@ -67,7 +68,9 @@ Une fois lancée, vous pouvez accéder à :
 - **Application front** : [http://localhost:3000](http://localhost:3000)
 - **Admin Strapi** : [http://localhost:1337/admin](http://localhost:1337/admin)
 
-**Pour vous connecter**, utilisez les identifiants suivants :
+Lors du premier accès à l'admin Strapi, la page d'inscription s'affichera pour vous permettre de créer votre compte administrateur.
+
+**Pour acceder au dashboard depuis le front**, utilisez les identifiants suivants :
 
 - **Email** : i.alexis@tx-studio.com
 - **Mot de passe** : Ismael!9
