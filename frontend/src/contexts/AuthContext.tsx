@@ -11,7 +11,7 @@ interface State {
 
 interface Context extends State {
   setToken: (token: string) => void;
-  removeToken: () => void;
+  removeToken: () => Promise<void>;
   refreshUser: () => Promise<void>;
   isAuthenticated: () => boolean;
 }
@@ -56,7 +56,7 @@ function useAuthProvider() {
       console.error('[AuthContext] Error fetching user:', e);
       const user = window.localStorage.getItem('user');
       if (user) {
-        setCurrentUser(JSON.parse(user));
+        setCurrentUser(JSON.parse(user) as User);
       } else {
         setCurrentUser(undefined);
       }

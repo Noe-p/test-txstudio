@@ -1,9 +1,6 @@
 import { useAuthContext } from '@/contexts/AuthContext';
-import { strapiApi } from '@/services/strapi/api';
 import { getRiskData } from '@/services/utils';
 import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
-import { EuriborType } from '@/types/strapi/singleTypes/euribor';
-import { useQuery } from '@tanstack/react-query';
 import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -21,10 +18,8 @@ interface LoansTabProps {
 export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
   const t = useTranslations('common');
   const { currentUser: user } = useAuthContext();
-  const { data: euribor } = useQuery<EuriborType>({
-    queryKey: ['euribor'],
-    queryFn: () => strapiApi.euribor.get(),
-  });
+
+  const euribors = dashboardData?.euribors ?? [];
 
   const riskData = getRiskData(dashboardData?.risk);
 
@@ -112,14 +107,7 @@ export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
             </div>
           )}
           <div className="md:col-span-3">
-            <EuriborTable
-              data={{
-                euribor1w: euribor?.euribor1w ?? [],
-                euribor2w: euribor?.euribor2w ?? [],
-                euribor3w: euribor?.euribor3w ?? [],
-                average: euribor?.averageSectorSpread ?? [],
-              }}
-            />
+            <EuriborTable euribors={euribors.length > 0 ? euribors : null} />
           </div>
         </div>
       </Col>

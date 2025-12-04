@@ -1,6 +1,4 @@
-import { strapiApi } from '@/services/strapi/api';
-import type { LoanType } from '@/types/strapi/collectionTypes/loan';
-import { useQuery } from '@tanstack/react-query';
+import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { useTranslations } from 'next-intl';
 import { Loader } from '../Loaders/Loader';
 import { Col, ColCenter, Row } from '../utils/Flex';
@@ -8,20 +6,21 @@ import { H1, P12 } from '../utils/Texts';
 import { ClosureCard } from './ClosureCard';
 import { DashboardCard } from './DashboardCard';
 import { LoansTable } from './LoansTable';
-import { LoanStatusItem, getStatusMeta } from './LoanStatusItem';
+import { getStatusMeta, LoanStatusItem } from './LoanStatusItem';
 import { ValidationStepsCard } from './ValidationStepsCard';
 
-export function TransactionTab(): React.JSX.Element {
+interface TransactionTabProps {
+  dashboardData?: DashboardType | null;
+}
+
+export function TransactionTab({ dashboardData }: TransactionTabProps): React.JSX.Element {
   const t = useTranslations('common');
 
-  const {
-    data: loans,
-    isLoading,
-    isError,
-  } = useQuery<LoanType[]>({
-    queryKey: ['loans'],
-    queryFn: () => strapiApi.loans.getAll(),
-  });
+  const loans = dashboardData?.loans;
+  const isLoading = !dashboardData;
+  const isError = false;
+
+  console.log('Loans data in TransactionTab:', loans);
 
   return (
     <Col className=" mt-10 gap-10">
@@ -37,7 +36,7 @@ export function TransactionTab(): React.JSX.Element {
               <Col className="gap-4 w-full">
                 <P12>{t('transactionTab.state')}</P12>
                 <LoanStatusItem title={loans[0].title} status={loans[0].loanStatus} />
-                <LoanStatusItem title={loans[1].title} status={loans[1].loanStatus} />
+                <LoanStatusItem title={loans[1]?.title ?? ''} status={loans[1].loanStatus} />
                 <P12 className="mt-2 text-foreground text-center underline underline-offset-2 cursor-pointer">
                   {t('transactionTab.createNewFile')}
                 </P12>

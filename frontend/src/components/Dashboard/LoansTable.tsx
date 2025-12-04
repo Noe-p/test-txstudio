@@ -132,7 +132,7 @@ export function LoansTable({ loans }: LoansTableProps): React.JSX.Element {
                 <TableCell>
                   {(() => {
                     const status = loan.financialInfo?.requestStatus;
-                    if (!status) return <CenteredCell>-</CenteredCell>;
+                    if (!status) return <CenteredCell>{'-'}</CenteredCell>;
                     const { colorClass } = getStatusMeta(status);
                     return (
                       <CenteredCell>

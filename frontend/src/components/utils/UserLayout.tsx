@@ -104,7 +104,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
     [t],
   );
 
-  const bottomMenuItems = useMemo(
+  const bottomMenuItems: MenuItem[] = useMemo(
     () => [
       {
         icon: Bell,
@@ -177,27 +177,34 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
                   {bottomMenuItems.map((item) => {
                     const isActionItem = item.action !== undefined;
                     const href = item.href || '#';
+                    const badge = item.badge;
+                    const Icon = item.icon;
+                    const label = item.label;
                     return (
-                      <SidebarMenuItem key={item.label}>
+                      <SidebarMenuItem key={label}>
                         <SidebarMenuButton asChild>
                           {isActionItem ? (
                             <button
-                              onClick={item.action!}
+                              onClick={() => {
+                                if (item.action) {
+                                  void item.action();
+                                }
+                              }}
                               className={cn(
                                 'flex items-center justify-center gap-3 w-full text-left rounded-md px-3 py-2 transition-colors',
                                 !item.disabled && 'hover:bg-secondary hover:text-primary',
                                 item.disabled && 'cursor-not-allowed opacity-60',
                               )}
                             >
-                              <item.icon className="h-8 w-8" />
+                              <Icon className="h-8 w-8" />
                               <RowCenter className="gap-2 flex-1 justify-between">
-                                <span className="flex-1">{item.label}</span>
-                                {(item as any).badge && (
+                                <span className="flex-1">{label}</span>
+                                {badge && (
                                   <Badge
                                     variant="default"
                                     className="bg-secondary text-secondary-foreground rounded-full h-5 w-5 flex items-center justify-center p-0 text-xs"
                                   >
-                                    {(item as any).badge}
+                                    {badge}
                                   </Badge>
                                 )}
                               </RowCenter>
@@ -212,15 +219,15 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
                               )}
                               onClick={(e) => item.disabled && e.preventDefault()}
                             >
-                              <item.icon className="h-8 w-8" />
+                              <Icon className="h-8 w-8" />
                               <RowCenter className="gap-2 flex-1 justify-between">
-                                <span className="flex-1">{item.label}</span>
-                                {(item as any).badge && (
+                                <span className="flex-1">{label}</span>
+                                {badge && (
                                   <Badge
                                     variant="default"
                                     className="bg-secondary text-secondary-foreground rounded-full h-5 w-5 flex items-center justify-center p-0 text-xs"
                                   >
-                                    {(item as any).badge}
+                                    {badge}
                                   </Badge>
                                 )}
                               </RowCenter>

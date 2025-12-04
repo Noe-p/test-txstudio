@@ -1,4 +1,4 @@
-import { EuriborData } from '@/types/strapi/singleTypes/euribor';
+import { EuriborType } from '@/types/strapi/collectionTypes/euribor';
 import { useTranslations } from 'next-intl';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
@@ -6,41 +6,46 @@ import { Col } from '../utils/Flex';
 import { P12 } from '../utils/Texts';
 
 interface EuriborTableProps {
-  data?:
-    | {
-        euribor1w?: EuriborData[];
-        euribor2w?: EuriborData[];
-        euribor3w?: EuriborData[];
-        average?: EuriborData[];
-      }
-    | null
-    | undefined;
+  euribors?: EuriborType[] | null;
 }
 
-export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
+export function EuriborTable({ euribors }: EuriborTableProps): React.JSX.Element {
   const t = useTranslations('common');
-  const euriborData = data ?? {};
+  const euriborsList = euribors ?? [];
+
+  if (euriborsList.length === 0) {
+    return (
+      <Col className="gap-4 bg-card rounded-lg p-6">
+        <P12 className="text-muted-foreground">{t('euriborTable.noData')}</P12>
+      </Col>
+    );
+  }
+
+  const defaultTab = euriborsList[0]?.id?.toString() ?? '0';
+
   return (
     <Col className="gap-4 bg-card rounded-lg p-6">
-      <Tabs defaultValue="euribor1w" className="w-full">
-        <TabsList className="mb-6 w-full grid grid-cols-4 bg-secondary">
-          <TabsTrigger value="euribor1w" className="text-xs bg-secondary h-10 px-0">
-            {t('euriborTable.euribor1w')}
-          </TabsTrigger>
-          <TabsTrigger value="euribor2w" className="text-xs bg-secondary h-10 px-0">
-            {t('euriborTable.euribor2w')}
-          </TabsTrigger>
-          <TabsTrigger value="euribor3w" className="text-xs bg-secondary  h-10 px-0">
-            {t('euriborTable.euribor3w')}
-          </TabsTrigger>
-          <TabsTrigger value="average" className="text-xs bg-secondary  h-10 px-0">
-            {t('euriborTable.average')}
-          </TabsTrigger>
-        </TabsList>
+      <Tabs defaultValue={defaultTab} className="w-full">
+        <div className="mb-6">
+          <TabsList
+            className="w-full bg-secondary grid"
+            style={{ gridTemplateColumns: `repeat(${euriborsList.length}, 1fr)` }}
+          >
+            {euriborsList.map((euribor) => (
+              <TabsTrigger
+                key={euribor.id}
+                value={euribor.id?.toString() ?? ''}
+                className="text-xs bg-secondary h-10 px-4 whitespace-nowrap"
+              >
+                {euribor.title}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
-        {(['euribor1w', 'euribor2w', 'euribor3w', 'average'] as const).map((tab) => (
-          <TabsContent key={tab} value={tab}>
-            {euriborData[tab] && euriborData[tab].length > 0 ? (
+        {euriborsList.map((euribor) => (
+          <TabsContent key={euribor.id} value={euribor.id?.toString() ?? ''}>
+            {euribor.table && euribor.table.length > 0 ? (
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -49,7 +54,7 @@ export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
                       {t('euriborTable.marketPlace')}
                     </TableHead>
                     <TableHead className="text-left px-0">
-                      {t('euriborTable.marketRiskFreePremium')}
+                      {t('euriborTable.marketRiskFreeDate')}
                     </TableHead>
                     <TableHead className="text-left px-0">
                       {t('euriborTable.marketRiskFreePremium')}
@@ -59,8 +64,8 @@ export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {euriborData[tab].map((row) => (
-                    <TableRow key={row.tenor}>
+                  {euribor.table.map((row, index) => (
+                    <TableRow key={row.tenor ?? index}>
                       <TableCell className="w-20">{row.tenor}</TableCell>
                       <TableCell className="w-20">{row.marketPlace}</TableCell>
                       <TableCell className="w-20">{row.marketRiskFreeDate}</TableCell>

@@ -1,9 +1,7 @@
 import { STRAPI_ROUTES } from '@/services/strapi/routes';
 import { LoginCredentials, LoginResponse, User } from '@/types/strapi/auth';
-import { LoansResponse, LoanType } from '@/types/strapi/collectionTypes/loan';
 import { ConfigurationResponse, ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { DashboardResponse, DashboardType } from '@/types/strapi/singleTypes/dashboard';
-import { EuriborResponse, EuriborType } from '@/types/strapi/singleTypes/euribor';
 import { HomePageResponse, HomePageType } from '@/types/strapi/singleTypes/homePage';
 import { HttpService } from './httpService';
 
@@ -14,7 +12,7 @@ export const strapiApi = {
       return response.data;
     },
     me: async (): Promise<User> => {
-      const response = await HttpService.get<any>(STRAPI_ROUTES.auth.me, {
+      const response = await HttpService.get<User>(STRAPI_ROUTES.auth.me, {
         params: {
           populate: '*',
         },
@@ -54,27 +52,19 @@ export const strapiApi = {
     get: async (): Promise<DashboardType> => {
       const response = await HttpService.get<DashboardResponse>(
         STRAPI_ROUTES.singleTypes.dashboard,
+        {
+          params: {
+            populate: {
+              loans: {
+                populate: '*',
+              },
+              euribors: {
+                populate: '*',
+              },
+            },
+          },
+        },
       );
-      return response.data.data;
-    },
-  },
-  euribor: {
-    get: async (): Promise<EuriborType> => {
-      const response = await HttpService.get<EuriborResponse>(STRAPI_ROUTES.singleTypes.euribor, {
-        params: {
-          populate: '*',
-        },
-      });
-      return response.data.data;
-    },
-  },
-  loans: {
-    getAll: async (): Promise<LoanType[]> => {
-      const response = await HttpService.get<LoansResponse>(STRAPI_ROUTES.collectionTypes.loans, {
-        params: {
-          populate: '*',
-        },
-      });
       return response.data.data;
     },
   },

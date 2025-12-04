@@ -6,10 +6,12 @@ export const STRAPI_ROUTES = {
   singleTypes: {
     homePage: '/api/home-page',
     dashboard: '/api/dashboard',
-    euribor: '/api/euribor-table',
+    // euribor moved into the dashboard single type on the backend
+    euribor: '/api/dashboard',
   },
   collectionTypes: {
-    loans: '/api/loans',
+    // loans are now returned through the dashboard single type
+    loans: '/api/dashboard',
   },
   configuration: {
     get: '/api/configuration',

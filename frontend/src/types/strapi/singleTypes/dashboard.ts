@@ -2,6 +2,8 @@ import {
   FinancialGraphDataPoint,
   FinancialGraphSeriesNames,
 } from '@/components/Charts/FinancialGraph';
+import { EuriborType } from '../collectionTypes/euribor';
+import { LoanType } from '../collectionTypes/loan';
 import { Generic } from '../generics';
 
 export interface DashboardType extends Generic {
@@ -12,10 +14,10 @@ export interface DashboardType extends Generic {
     chartData: FinancialGraphDataPoint[];
     seriesNames: FinancialGraphSeriesNames;
   };
+  loans: LoanType[];
+  euribors: EuriborType[];
 }
 
 export interface DashboardResponse {
   data: DashboardType;
 }
-
-// Euribor data moved to its own single type: see singleTypes/euribor.ts
