@@ -52,6 +52,7 @@
       "support": "Assistance",
       "notifications": "Mes notifications",
       "settings": "Réglages",
+      "logout": "Déconnexion",
       "kycStatus": "Statut Vérification KYC",
       "kycValid": "Validé",
       "kycInvalid": "Non validé"

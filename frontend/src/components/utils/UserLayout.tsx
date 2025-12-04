@@ -21,7 +21,7 @@ import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
-import { ArrowLeftRight, Bell, Home, LifeBuoy, Settings, Users } from 'lucide-react';
+import { ArrowLeftRight, Bell, Home, LifeBuoy, LogOut, Settings, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -38,10 +38,24 @@ interface UserLayoutProps {
 
 export function UserLayout(props: UserLayoutProps): React.JSX.Element {
   const { children, className, configurationData } = props;
-  const { currentUser: user, isAuthenticated } = useAuthContext();
+  const { currentUser: user, isAuthenticated, removeToken } = useAuthContext();
   const router = useRouter();
   const { setLogoUrl } = useAppContext();
   const t = useTranslations('common');
+
+  const handleLogout = async () => {
+    await removeToken();
+    router.push('/');
+  };
+
+  interface MenuItem {
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    href?: string;
+    disabled: boolean;
+    action?: () => Promise<void>;
+    badge?: number;
+  }
 
   useEffect(() => {
     const logoUrl = configurationData?.logo?.url
@@ -60,7 +74,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
     ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`
     : IMAGE_FALLBACK;
 
-  const menuItems = useMemo(
+  const menuItems: MenuItem[] = useMemo(
     () => [
       {
         icon: Home,
@@ -105,8 +119,15 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
         href: '#',
         disabled: true,
       },
+      {
+        icon: LogOut,
+        label: t('dashboard.sidebar.logout'),
+        href: '#',
+        disabled: false,
+        action: handleLogout,
+      },
     ],
-    [t],
+    [t, handleLogout],
   );
 
   return (
@@ -129,54 +150,86 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
             <SidebarGroup>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  {menuItems.map((item, index) => (
-                    <SidebarMenuItem key={item.label}>
-                      <SidebarMenuButton asChild isActive={index === 0}>
-                        <Link
-                          href={item.href}
-                          className={cn(
-                            'flex items-center justify-center gap-3',
-                            item.disabled && 'cursor-not-allowed opacity-60',
-                          )}
-                          onClick={(e) => item.disabled && e.preventDefault()}
-                        >
-                          <item.icon className="h-8 w-8" />
-                          <span className="flex-1">{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
+                  {menuItems.map((item, index) => {
+                    const href = item.href || '#';
+                    return (
+                      <SidebarMenuItem key={item.label}>
+                        <SidebarMenuButton asChild isActive={index === 0}>
+                          <Link
+                            href={href}
+                            className={cn(
+                              'flex items-center justify-center gap-3',
+                              item.disabled && 'cursor-not-allowed opacity-60',
+                            )}
+                            onClick={(e) => item.disabled && e.preventDefault()}
+                          >
+                            <item.icon className="h-8 w-8" />
+                            <span className="flex-1">{item.label}</span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
                 </SidebarMenu>
               </SidebarGroupContent>
               <SidebarGroupContent className="mt-20">
                 <SidebarMenu>
-                  {bottomMenuItems.map((item) => (
-                    <SidebarMenuItem key={item.label}>
-                      <SidebarMenuButton asChild>
-                        <Link
-                          href={item.href}
-                          className={cn(
-                            'flex items-center justify-center gap-3',
-                            item.disabled && 'cursor-not-allowed opacity-60',
+                  {bottomMenuItems.map((item) => {
+                    const isActionItem = item.action !== undefined;
+                    const href = item.href || '#';
+                    return (
+                      <SidebarMenuItem key={item.label}>
+                        <SidebarMenuButton asChild>
+                          {isActionItem ? (
+                            <button
+                              onClick={item.action!}
+                              className={cn(
+                                'flex items-center justify-center gap-3 w-full text-left rounded-md px-3 py-2 transition-colors',
+                                !item.disabled && 'hover:bg-secondary hover:text-primary',
+                                item.disabled && 'cursor-not-allowed opacity-60',
+                              )}
+                            >
+                              <item.icon className="h-8 w-8" />
+                              <RowCenter className="gap-2 flex-1 justify-between">
+                                <span className="flex-1">{item.label}</span>
+                                {(item as any).badge && (
+                                  <Badge
+                                    variant="default"
+                                    className="bg-secondary text-secondary-foreground rounded-full h-5 w-5 flex items-center justify-center p-0 text-xs"
+                                  >
+                                    {(item as any).badge}
+                                  </Badge>
+                                )}
+                              </RowCenter>
+                            </button>
+                          ) : (
+                            <Link
+                              href={href}
+                              className={cn(
+                                'flex items-center justify-center gap-3 rounded-md px-3 py-2 transition-colors',
+                                !item.disabled && 'hover:bg-secondary hover:text-primary',
+                                item.disabled && 'cursor-not-allowed opacity-60',
+                              )}
+                              onClick={(e) => item.disabled && e.preventDefault()}
+                            >
+                              <item.icon className="h-8 w-8" />
+                              <RowCenter className="gap-2 flex-1 justify-between">
+                                <span className="flex-1">{item.label}</span>
+                                {(item as any).badge && (
+                                  <Badge
+                                    variant="default"
+                                    className="bg-secondary text-secondary-foreground rounded-full h-5 w-5 flex items-center justify-center p-0 text-xs"
+                                  >
+                                    {(item as any).badge}
+                                  </Badge>
+                                )}
+                              </RowCenter>
+                            </Link>
                           )}
-                          onClick={(e) => item.disabled && e.preventDefault()}
-                        >
-                          <item.icon className="h-8 w-8" />
-                          <RowCenter className="gap-2 flex-1 justify-between">
-                            <span className="flex-1">{item.label}</span>
-                            {item.badge && (
-                              <Badge
-                                variant="default"
-                                className="bg-primary text-primary-foreground rounded-full h-5 w-5 flex items-center justify-center p-0 text-xs"
-                              >
-                                {item.badge}
-                              </Badge>
-                            )}
-                          </RowCenter>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
