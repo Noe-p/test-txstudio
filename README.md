@@ -48,6 +48,10 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés :
    make dev.strapi
    ```
 
+   Répondre 'Yes' à ce message :
+
+   > The import will delete your existing data! Are you sure you want to proceed?
+
 5. **Lancer le frontend (dans un autre terminal)**
 
    ```bash

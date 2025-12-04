@@ -54,7 +54,6 @@ strapi/.cache/
 strapi/.tmp/
 strapi/build/
 
-strapi/public/uploads/
 strapi/.strapi-updater.json
 strapi/database/data/
 strapi/database/dumps/*.sql
