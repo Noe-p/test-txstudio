@@ -129,14 +129,16 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-background">
         <Sidebar className="border-r">
-          <SidebarHeader className="px-6 py-4 mb-6">
-            <Image
-              src={logoUrl}
-              alt="Logo"
-              width={150}
-              height={40}
-              className="h-10 w-auto object-contain"
-            />
+          <SidebarHeader className="px-6 py-4 mb-6 ">
+            <Link href={ROUTES.home} className="flex justify-center">
+              <Image
+                src={logoUrl}
+                alt="Logo"
+                width={150}
+                height={40}
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
           </SidebarHeader>
 
           <SidebarContent>

@@ -1,4 +1,5 @@
 import { EuriborData } from '@/types/strapi/singleTypes/euribor';
+import { useTranslations } from 'next-intl';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Col } from '../utils/Flex';
@@ -17,22 +18,23 @@ interface EuriborTableProps {
 }
 
 export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
+  const t = useTranslations('common');
   const euriborData = data ?? {};
   return (
     <Col className="gap-4 bg-card rounded-lg p-6">
       <Tabs defaultValue="euribor1w" className="w-full">
         <TabsList className="mb-6 w-full grid grid-cols-4 bg-secondary">
           <TabsTrigger value="euribor1w" className="text-xs bg-secondary h-10 px-0">
-            {'Euribor1w'}
+            {t('euriborTable.euribor1w')}
           </TabsTrigger>
           <TabsTrigger value="euribor2w" className="text-xs bg-secondary h-10 px-0">
-            {'Euribor2w'}
+            {t('euriborTable.euribor2w')}
           </TabsTrigger>
           <TabsTrigger value="euribor3w" className="text-xs bg-secondary  h-10 px-0">
-            {'Euribor3w'}
+            {t('euriborTable.euribor3w')}
           </TabsTrigger>
           <TabsTrigger value="average" className="text-xs bg-secondary  h-10 px-0">
-            {'Average Sector Spread'}
+            {t('euriborTable.average')}
           </TabsTrigger>
         </TabsList>
 
@@ -42,41 +44,35 @@ export function EuriborTable({ data }: EuriborTableProps): React.JSX.Element {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>{'Tenor'}</TableHead>
-                    <TableHead>{'Market Place'}</TableHead>
-                    <TableHead>
-                      <div className="leading-tight">
-                        {'Market Risk Free'}
-                        <br />
-                        <span className="font-normal">{'Date'}</span>
-                      </div>
+                    <TableHead className="text-left px-0">{t('euriborTable.tenor')}</TableHead>
+                    <TableHead className="text-left px-0">
+                      {t('euriborTable.marketPlace')}
                     </TableHead>
-                    <TableHead>
-                      <div className="leading-tight">
-                        {'Market Risk Free'}
-                        <br />
-                        <span className="font-normal">{'Premium'}</span>
-                      </div>
+                    <TableHead className="text-left px-0">
+                      {t('euriborTable.marketRiskFreePremium')}
                     </TableHead>
-                    <TableHead>{'Change %'}</TableHead>
-                    <TableHead>{'Variation'}</TableHead>
+                    <TableHead className="text-left px-0">
+                      {t('euriborTable.marketRiskFreePremium')}
+                    </TableHead>
+                    <TableHead className="text-left px-0">{t('euriborTable.change')}</TableHead>
+                    <TableHead className="text-left px-0">{t('euriborTable.variation')}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {euriborData[tab].map((row) => (
                     <TableRow key={row.tenor}>
-                      <TableCell>{row.tenor}</TableCell>
-                      <TableCell>{row.marketPlace}</TableCell>
-                      <TableCell>{row.marketRiskFreeDate}</TableCell>
-                      <TableCell>{row.marketRiskFreePremium}</TableCell>
-                      <TableCell>{row.change}</TableCell>
-                      <TableCell>{row.variation}</TableCell>
+                      <TableCell className="w-20">{row.tenor}</TableCell>
+                      <TableCell className="w-20">{row.marketPlace}</TableCell>
+                      <TableCell className="w-20">{row.marketRiskFreeDate}</TableCell>
+                      <TableCell className="w-20">{row.marketRiskFreePremium}</TableCell>
+                      <TableCell className="w-20">{row.change}</TableCell>
+                      <TableCell className="w-20">{row.variation}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
             ) : (
-              <P12 className="text-muted-foreground">{'No data available'}</P12>
+              <P12 className="text-muted-foreground">{t('euriborTable.noData')}</P12>
             )}
           </TabsContent>
         ))}

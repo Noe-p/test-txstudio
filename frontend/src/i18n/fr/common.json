@@ -78,5 +78,61 @@
       "riskScore": "Score risque",
       "lastTransaction": "Montant dernière transaction"
     }
+  },
+  "transactionTab": {
+    "state": "État",
+    "createNewFile": "Créer un nouveau dossier",
+    "validationSteps": "Validation"
+  },
+  "closureCard": {
+    "closureEstimate": "Estimation de clôture du dossier au :",
+    "closureIcon": "Clôture"
+  },
+  "euriborTable": {
+    "euribor1w": "Euribor1w",
+    "euribor2w": "Euribor2w",
+    "euribor3w": "Euribor3w",
+    "average": "Average Sector Spread",
+    "tenor": "Tenor",
+    "marketPlace": "Market Place",
+    "marketRiskFreeDate": "Market Risk Free Date",
+    "marketRiskFreePremium": "Market Risk Free Premium",
+    "change": "Change %",
+    "variation": "Variation",
+    "noData": "No data available"
+  },
+  "validationStepsCard": {
+    "noSteps": "Aucune étape de validation disponible",
+    "nextStepCTA": "Pour déclencher la prochaine étape de validation, veuillez nous joindre :",
+    "downloadFile": "Dossier super important.pdf"
+  },
+  "loansTable": {
+    "title": "Mes prêts",
+    "contractNumber": "Numéro de contrat",
+    "borrowerId": "Identifiant emprunteur",
+    "requestedAmount": "Montant demandé",
+    "loanAmount": "Montant du prêt",
+    "monthlyPayment": "Mensualité",
+    "duration": "Durée souhaitée",
+    "status": "Statut",
+    "actions": "Actions",
+    "pending": "En attente",
+    "validated": "Validé",
+    "closed": "Clos",
+    "viewDetails": "Voir détails",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "months": "mois"
+  },
+  "financialDetailsTable": {
+    "title": "Détails financiers",
+    "interestRate": "Taux d'intérêt",
+    "commission": "Commission",
+    "effectiveRate": "Taux Effect Global",
+    "requestDate": "Date de la demande",
+    "lastDueDate": "Date dernière échéance",
+    "requestStatus": "Statut de la demande",
+    "validated": "Validé",
+    "pending": "En attente"
   }
 }

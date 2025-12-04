@@ -2,11 +2,13 @@ import { strapiApi } from '@/services/strapi/api';
 import type { LoanType } from '@/types/strapi/collectionTypes/loan';
 import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslations } from 'next-intl';
 import { Loader } from '../Loaders/Loader';
 import { Col, ColCenter, Row } from '../utils/Flex';
 import { H1, P12 } from '../utils/Texts';
 import { ClosureCard } from './ClosureCard';
 import { DashboardCard } from './DashboardCard';
+import { LoansTable } from './LoansTable';
 import { LoanStatusItem, getStatusMeta } from './LoanStatusItem';
 import { ValidationStepsCard } from './ValidationStepsCard';
 
@@ -15,6 +17,7 @@ interface TransactionTabProps {
 }
 
 export function TransactionTab({ dashboardData }: TransactionTabProps): React.JSX.Element {
+  const t = useTranslations('common');
   console.log('TransactionTab dashboardData:', dashboardData);
 
   const {
@@ -38,11 +41,11 @@ export function TransactionTab({ dashboardData }: TransactionTabProps): React.JS
           <Row className="gap-3 w-full">
             <DashboardCard>
               <Col className="gap-4 w-full">
-                <P12>{'État'}</P12>
+                <P12>{t('transactionTab.state')}</P12>
                 <LoanStatusItem title={loans[0].title} status={loans[0].loanStatus} />
                 <LoanStatusItem title={loans[1].title} status={loans[1].loanStatus} />
                 <P12 className="mt-2 text-foreground text-center underline underline-offset-2 cursor-pointer">
-                  {'Créer un nouveau dossier'}
+                  {t('transactionTab.createNewFile')}
                 </P12>
               </Col>
             </DashboardCard>
@@ -82,6 +85,9 @@ export function TransactionTab({ dashboardData }: TransactionTabProps): React.JS
               />
             </DashboardCard>
           </Row>
+          <Col className="gap-4 w-full mt-6">
+            <LoansTable loans={loans} />
+          </Col>
         </Col>
       )}
     </Col>

@@ -1,5 +1,6 @@
 import type { LoanStatus, ValidationStepType } from '@/types/strapi/componentTypes/loan';
 import { Check, Download } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Col, ColCenter, Row, RowBetween } from '../utils/Flex';
 import { H2, P10, P12 } from '../utils/Texts';
 
@@ -20,11 +21,12 @@ export function ValidationStepsCard({
   loanTitle,
   status,
 }: ValidationStepsCardProps): React.JSX.Element {
+  const t = useTranslations('common');
   if (!steps || steps.length === 0) {
     return (
       <Col className="gap-4 w-full">
-        <H2 className="text-lg">{loanTitle || 'Validation'}</H2>
-        <P12 className="text-muted-foreground">{'Aucune étape de validation disponible'}</P12>
+        <H2 className="text-lg">{loanTitle || t('transactionTab.validationSteps')}</H2>
+        <P12 className="text-muted-foreground">{t('validationStepsCard.noSteps')}</P12>
       </Col>
     );
   }
@@ -58,14 +60,14 @@ export function ValidationStepsCard({
 
       {/* Next step CTA */}
       <ColCenter className="gap-1">
-        <P10 className="text-foreground text-center">
-          {'Pour déclencher la prochaine étape de validation, veuillez nous joindre :'}
-        </P10>
+        <P10 className="text-foreground text-center">{t('validationStepsCard.nextStepCTA')}</P10>
         <Row className="items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
           <span className="text-base text-muted-foreground">
             <Download className="w-3 h-3" />
           </span>
-          <P10 className="text-muted-foreground underline">{'Dossier super important.pdf'}</P10>
+          <P10 className="text-muted-foreground underline">
+            {t('validationStepsCard.downloadFile')}
+          </P10>
         </Row>
       </ColCenter>
     </Col>
