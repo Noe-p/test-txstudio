@@ -13,7 +13,8 @@
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
     "upgrade:dry": "npx @strapi/upgrade latest --dry",
-    "db:export": "strapi export --file ./database/dumps/strapi-export.tar.gz"
+    "db:export": "sh -c 'strapi export --file ./database/dumps/strapi-export-$(date +%Y%m%d-%H%M%S).tar --no-encrypt'",
+    "db:import": "sh -c 'LATEST=$(ls -t ./database/dumps/strapi-export-*.tar* | head -n1); strapi import --file \"$LATEST\"'"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.31.2",

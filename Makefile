@@ -29,4 +29,5 @@ dev.front:
 	fi
 
 dev.strapi: up
+	@cd $(STRAPI_DIR) && npm run db:import -- --file ./database/dumps/strapi-export || true
 	@cd $(STRAPI_DIR) && npm run dev
