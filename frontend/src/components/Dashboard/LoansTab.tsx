@@ -27,7 +27,7 @@ export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
     <Col className=" mt-10 gap-10">
       <Col className="gap-3 w-full">
         <H3>{t('dashboard.myAccount')}</H3>
-        <Row className="gap-3 w-full">
+        <Row className="gap-3 w-full flex-wrap flex-col md:flex-row">
           {/* Card 1 - Profil */}
           <DashboardCard>
             <div className="absolute top-4 right-4">
@@ -97,7 +97,7 @@ export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
       {/* Informations */}
       <Col className="gap-3 w-full">
         <H3>{t('dashboard.infos')}</H3>
-        <div className="grid md:grid-cols-5 grid-cols-1 gap-5 w-full items-start">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-5 w-full items-start">
           {dashboardData?.financialGraphData && (
             <div className="md:col-span-2">
               <FinancialGraph

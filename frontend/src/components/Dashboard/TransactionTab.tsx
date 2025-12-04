@@ -20,8 +20,6 @@ export function TransactionTab({ dashboardData }: TransactionTabProps): React.JS
   const isLoading = !dashboardData;
   const isError = false;
 
-  console.log('Loans data in TransactionTab:', loans);
-
   return (
     <Col className=" mt-10 gap-10">
       {isLoading && (
@@ -30,8 +28,8 @@ export function TransactionTab({ dashboardData }: TransactionTabProps): React.JS
         </div>
       )}
       {!isLoading && !isError && loans && (
-        <Col>
-          <Row className="gap-3 w-full">
+        <Col className="min-w-full">
+          <Row className="gap-3 w-full min-w-0 items-stretch flex-col md:flex-row">
             <DashboardCard>
               <Col className="gap-4 w-full">
                 <P12>{t('transactionTab.state')}</P12>
@@ -78,7 +76,7 @@ export function TransactionTab({ dashboardData }: TransactionTabProps): React.JS
               />
             </DashboardCard>
           </Row>
-          <Col className="gap-4 w-full mt-6">
+          <Col className="gap-4 w-full mt-6 overflow-x-auto min-w-0">
             <LoansTable loans={loans} />
           </Col>
         </Col>

@@ -6,7 +6,7 @@ export function Col({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className={cn('flex flex-col', className)} {...props}>
+    <div className={cn('flex flex-col  min-w-0', className)} {...props}>
       {children}
     </div>
   );
@@ -18,7 +18,7 @@ export function Row({
   ...props
 }: { children: React.ReactNode; className?: string } & React.HTMLProps<HTMLDivElement>) {
   return (
-    <div className={cn('flex flex-row', className)} {...props}>
+    <div className={cn('flex flex-row min-w-0', className)} {...props}>
       {children}
     </div>
   );

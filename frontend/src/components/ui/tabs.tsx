@@ -23,7 +23,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'px-12 py-2 rounded-md transition-colors bg-background text-muted-foreground',
+      'md:px-12 px-4 w-full py-2 rounded-md transition-colors bg-background text-muted-foreground text-nowrap',
       'data-[state=active]:bg-tab-active data-[state=active]:text-primary',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       'disabled:pointer-events-none disabled:opacity-50',

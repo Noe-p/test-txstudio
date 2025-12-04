@@ -36,7 +36,7 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
         ) : user ? (
           <Col className="gap-10">
             {/*  Header */}
-            <RowBetween>
+            <RowBetween className="items-center gap-4 flex-col sm:flex-row">
               <H1>{t('user.welcome', { username: user.username })}</H1>
               <Avatar className="h-10 w-10">
                 {user?.profilePicture?.url && (
@@ -56,23 +56,24 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
 
             {/* Tabs */}
             <Col className="gap-4 w-full">
-              <RowBetween className="items-center w-full">
+              <RowBetween className="items-start gap-4 flex-col sm:flex-row w-full">
                 <Tabs defaultValue="loans" className="w-full">
-                  <RowBetween className="items-center">
-                    <TabsList>
+                  <RowBetween className="flex-col gap-3 sm:flex-row sm:items-center">
+                    <TabsList className="w-full sm:w-auto">
                       <TabsTrigger value="loans">{t('dashboard.tabs.loans')}</TabsTrigger>
                       <TabsTrigger value="invoices">{t('dashboard.tabs.invoices')}</TabsTrigger>
                     </TabsList>
-                    <div className="ml-auto">
+                    <div className="ml-0 sm:ml-auto w-full sm:w-auto">
                       <Button
                         variant="default"
-                        className="bg-primary text-primary-foreground rounded-md"
+                        className="w-full sm:w-auto bg-primary text-primary-foreground rounded-md"
                       >
                         {t('dashboard.requestFunding')}
                       </Button>
                     </div>
                   </RowBetween>
                   <TabsContent value="loans">
+                    {/* Content of the Loans tab */}
                     <LoansTab dashboardData={dashboardData ?? null} />
                   </TabsContent>
                   <TabsContent value="invoices">
@@ -86,7 +87,7 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
             <Col className="gap-3 w-full">
               <H3>{t('dashboard.transactionsSection.title')}</H3>
               <Tabs defaultValue="active" className="w-full">
-                <TabsList className="w-fit">
+                <TabsList className="md:w-min flex-wrap md:flex-nowrap min-w-0">
                   <TabsTrigger
                     value="active"
                     className="data-[state=active]:bg-success data-[state=active]:text-primary-foreground"
@@ -108,6 +109,7 @@ export function DashboardPage({ configurationData }: DashboardPageProps) {
                 </TabsList>
 
                 <TabsContent value="active">
+                  {/* Content of the Transactions tab */}
                   <TransactionTab dashboardData={dashboardData ?? null} />
                 </TabsContent>
                 <TabsContent value="pending">

@@ -282,7 +282,7 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
           </SidebarFooter>
         </Sidebar>
 
-        <div className="flex-1 flex flex-col bg-secondary">
+        <div className="flex-1 flex flex-col bg-secondary min-w-0">
           <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:hidden">
             <SidebarTrigger />
             <Image
@@ -293,7 +293,9 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
               className="h-8 w-auto object-contain"
             />
           </header>
-          <main className={cn('flex-1 overflow-auto p-8 pb-30', className)}>{children}</main>
+          <main className={cn('flex-1 overflow-auto p-4 md:p-8 pb-20 md:pb-30', className)}>
+            {children}
+          </main>
         </div>
       </div>
     </SidebarProvider>

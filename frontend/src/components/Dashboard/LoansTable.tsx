@@ -3,8 +3,7 @@ import { useTranslations } from 'next-intl';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import { Col } from '../utils/Flex';
 import { P12 } from '../utils/Texts';
-
-import { getStatusMeta } from '@/services/utils';
+import { getStatusMeta } from './LoanStatusItem';
 
 interface LoansTableProps {
   loans?: LoanType[];
@@ -27,65 +26,74 @@ export function LoansTable({ loans }: LoansTableProps): React.JSX.Element {
 
   return (
     <>
-      <Col className="bg-background p-5 rounded-lg">
-        <Table>
-          <TableHeader className="">
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="w-25">{}</TableHead>
-              <CenteredTableHead>{t('loansTable.contractNumber')}</CenteredTableHead>
-              <CenteredTableHead>{t('loansTable.borrowerId')}</CenteredTableHead>
-              <CenteredTableHead>{t('loansTable.requestedAmount')}</CenteredTableHead>
-              <CenteredTableHead>{t('loansTable.loanAmount')}</CenteredTableHead>
-              <CenteredTableHead>{t('loansTable.monthlyPayment')}</CenteredTableHead>
-              <CenteredTableHead>{t('loansTable.duration')}</CenteredTableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {loans.map((loan) => (
-              <TableRow key={loan.id} className="hover:bg-muted/50 transition-colors">
-                <TableCell className="font-bold text-foreground">{loan.title}</TableCell>
-                <TableCell>
-                  <CenteredCell>{loan.borrowerInfo?.contractNumber || '-'}</CenteredCell>
-                </TableCell>
-                <TableCell>
-                  <CenteredCell>{loan.borrowerInfo?.borrowerId || '-'}</CenteredCell>
-                </TableCell>
-                <TableCell>
-                  <CenteredCell>
-                    {loan.borrowerInfo?.requestedAmount
-                      ? `${loan.borrowerInfo.requestedAmount}€`
-                      : t('loansTable.pending')}
-                  </CenteredCell>
-                </TableCell>
-                <TableCell>
-                  <CenteredCell>
-                    {loan.borrowerInfo?.currentLoanAmount
-                      ? `${loan.borrowerInfo.currentLoanAmount}€`
-                      : t('loansTable.pending')}
-                  </CenteredCell>
-                </TableCell>
-                <TableCell>
-                  <CenteredCell>
-                    {loan.borrowerInfo?.monthlyPayment
-                      ? `${loan.borrowerInfo.monthlyPayment}€`
-                      : t('loansTable.pending')}
-                  </CenteredCell>
-                </TableCell>
-                <TableCell>
-                  <CenteredCell>
-                    {loan.borrowerInfo?.durationMonths
-                      ? `${loan.borrowerInfo.durationMonths} ${t('loansTable.months')}`
-                      : t('loansTable.pending')}
-                  </CenteredCell>
-                </TableCell>
+      <Col className="bg-background p-5 rounded-lg min-w-0">
+        <div className="w-full overflow-x-auto">
+          <Table className="min-w-[640px]">
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="w-25">{}</TableHead>
+                <CenteredTableHead>{t('loansTable.contractNumber')}</CenteredTableHead>
+                <CenteredTableHead>{t('loansTable.borrowerId')}</CenteredTableHead>
+                <CenteredTableHead>{t('loansTable.requestedAmount')}</CenteredTableHead>
+                <CenteredTableHead>{t('loansTable.loanAmount')}</CenteredTableHead>
+                <CenteredTableHead>{t('loansTable.monthlyPayment')}</CenteredTableHead>
+                <CenteredTableHead>{t('loansTable.duration')}</CenteredTableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+
+            <TableBody>
+              {loans.map((loan) => (
+                <TableRow key={loan.id} className="hover:bg-muted/50 transition-colors">
+                  <TableCell className="font-bold text-foreground">{loan.title}</TableCell>
+
+                  <TableCell>
+                    <CenteredCell>{loan.borrowerInfo?.contractNumber || '-'}</CenteredCell>
+                  </TableCell>
+
+                  <TableCell>
+                    <CenteredCell>{loan.borrowerInfo?.borrowerId || '-'}</CenteredCell>
+                  </TableCell>
+
+                  <TableCell>
+                    <CenteredCell>
+                      {loan.borrowerInfo?.requestedAmount
+                        ? `${loan.borrowerInfo.requestedAmount}€`
+                        : t('loansTable.pending')}
+                    </CenteredCell>
+                  </TableCell>
+
+                  <TableCell>
+                    <CenteredCell>
+                      {loan.borrowerInfo?.currentLoanAmount
+                        ? `${loan.borrowerInfo.currentLoanAmount}€`
+                        : t('loansTable.pending')}
+                    </CenteredCell>
+                  </TableCell>
+
+                  <TableCell>
+                    <CenteredCell>
+                      {loan.borrowerInfo?.monthlyPayment
+                        ? `${loan.borrowerInfo.monthlyPayment}€`
+                        : t('loansTable.pending')}
+                    </CenteredCell>
+                  </TableCell>
+
+                  <TableCell>
+                    <CenteredCell>
+                      {loan.borrowerInfo?.durationMonths
+                        ? `${loan.borrowerInfo.durationMonths} ${t('loansTable.months')}`
+                        : t('loansTable.pending')}
+                    </CenteredCell>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </Col>
 
-      <Col className="bg-background p-5 rounded-lg">
-        <Table>
+      <Col className="bg-background p-5 rounded-lg overflow-x-auto">
+        <Table className="min-w-[640px]">
           <TableHeader className="">
             <TableRow className="hover:bg-transparent">
               <TableHead className="w-25">{}</TableHead>

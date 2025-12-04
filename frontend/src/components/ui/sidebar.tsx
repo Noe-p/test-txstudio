@@ -54,6 +54,7 @@ const SidebarProvider = React.forwardRef<
     defaultOpen?: boolean;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
+    fullHeight?: boolean;
   }
 >(
   (
@@ -61,6 +62,7 @@ const SidebarProvider = React.forwardRef<
       defaultOpen = true,
       open: openProp,
       onOpenChange: setOpenProp,
+      fullHeight = true,
       className,
       style,
       children,
@@ -137,7 +139,8 @@ const SidebarProvider = React.forwardRef<
               } as React.CSSProperties
             }
             className={cn(
-              'group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar',
+              'group/sidebar-wrapper flex w-full has-[[data-variant=inset]]:bg-sidebar',
+              fullHeight && 'min-h-svh',
               className,
             )}
             ref={ref}

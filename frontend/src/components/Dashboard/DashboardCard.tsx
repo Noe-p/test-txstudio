@@ -7,7 +7,7 @@ interface DashboardCardProps {
 
 export function DashboardCard({ children }: DashboardCardProps) {
   return (
-    <Card className="bg-background border-none shadow-none rounded-lg p-3 flex-1 min-w-[200px] relative">
+    <Card className="min-w-0 bg-background border-none shadow-none rounded-lg p-3 flex-1 min-w-[200px] relative">
       {children}
     </Card>
   );
