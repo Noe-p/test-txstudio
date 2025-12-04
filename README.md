@@ -77,7 +77,7 @@ Lors du premier accès à l'admin Strapi, la page d'inscription s'affichera pour
 
 ## 🛠️ Stack technique
 
-Voici les technologies que nous avons choisies pour ce projet :
+Voici les technos que j'ai choisies pour ce projet :
 
 ### Frontend
 
@@ -126,7 +126,7 @@ frontend/
 
 ### Backend (Strapi)
 
-Notre back-office Strapi gère trois collections principales :
+Mon back-office Strapi gère trois collections principales :
 
 **HomePage** – Contient tout le contenu de la page d'accueil :
 
