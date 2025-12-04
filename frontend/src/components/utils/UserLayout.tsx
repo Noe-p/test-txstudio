@@ -16,11 +16,10 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { useAppContext } from '@/contexts';
-import { useIsAuthenticated } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
-import { User } from '@/types/strapi/auth';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { ArrowLeftRight, Bell, Home, LifeBuoy, Settings, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -39,25 +38,10 @@ interface UserLayoutProps {
 
 export function UserLayout(props: UserLayoutProps): React.JSX.Element {
   const { children, className, configurationData } = props;
-  const isAuthenticated = useIsAuthenticated();
+  const { currentUser: user, isAuthenticated } = useAuthContext();
   const router = useRouter();
   const { setLogoUrl } = useAppContext();
-  const [user, setUser] = React.useState<User | null>(null);
   const t = useTranslations('common');
-
-  // Charger l'utilisateur côté client uniquement
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const userStr = localStorage.getItem('user');
-      if (userStr) {
-        try {
-          setUser(JSON.parse(userStr) as User);
-        } catch {
-          setUser(null);
-        }
-      }
-    }
-  }, []);
 
   useEffect(() => {
     const logoUrl = configurationData?.logo?.url
@@ -67,10 +51,10 @@ export function UserLayout(props: UserLayoutProps): React.JSX.Element {
   }, [configurationData, setLogoUrl]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated()) {
       router.push('/');
     }
-  }, [isAuthenticated, router]);
+  }, [router, isAuthenticated]);
 
   const logoUrl = configurationData?.logo?.url
     ? `${process.env.NEXT_PUBLIC_API_URL}${configurationData.logo.url}`

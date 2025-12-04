@@ -4,13 +4,12 @@ import { TransactionTab } from '@/components/Dashboard/TransactionTab';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useAuthUser } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { strapiApi } from '@/services/strapi/api';
 import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
 import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
 import { Col, RowBetween } from '../../utils/Flex';
 import { H1, H3 } from '../../utils/Texts';
 import { UserLayout } from '../../utils/UserLayout';
@@ -20,24 +19,19 @@ interface DashboardPageProps {
 }
 
 export function DashboardPage({ configurationData }: DashboardPageProps) {
-  const [mounted, setMounted] = useState(false);
-  const { data: user } = useAuthUser();
+  const { currentUser: user, isLoaded } = useAuthContext();
   const t = useTranslations('common');
 
   const { data: dashboardData } = useQuery<DashboardType>({
     queryKey: ['dashboard'],
     queryFn: () => strapiApi.dashboard.get(),
-    enabled: mounted && !!user,
+    enabled: isLoaded && !!user,
   });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <UserLayout configurationData={configurationData ?? null}>
       <Col className="gap-6">
-        {!mounted ? (
+        {!isLoaded ? (
           <H1>{t('user.loading')}</H1>
         ) : user ? (
           <Col className="gap-10">

@@ -1,6 +1,5 @@
 import { strapiApi } from '@/services/strapi/api';
 import type { LoanType } from '@/types/strapi/collectionTypes/loan';
-import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { Loader } from '../Loaders/Loader';
@@ -12,13 +11,8 @@ import { LoansTable } from './LoansTable';
 import { LoanStatusItem, getStatusMeta } from './LoanStatusItem';
 import { ValidationStepsCard } from './ValidationStepsCard';
 
-interface TransactionTabProps {
-  dashboardData?: DashboardType | null;
-}
-
-export function TransactionTab({ dashboardData }: TransactionTabProps): React.JSX.Element {
+export function TransactionTab(): React.JSX.Element {
   const t = useTranslations('common');
-  console.log('TransactionTab dashboardData:', dashboardData);
 
   const {
     data: loans,

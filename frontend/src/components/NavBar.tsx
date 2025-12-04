@@ -3,14 +3,14 @@
 import { Button } from '@/components/ui/button';
 import { RowBetween, RowCenter } from '@/components/utils/Flex';
 import { P16 } from '@/components/utils/Texts';
-import { useUser } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { ROUTES } from '@/services/routes';
 import { cn } from '@/services/utils';
 import { IMAGE_FALLBACK } from '@/static/constants';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface NavBarProps {
   className?: string;
@@ -19,12 +19,7 @@ interface NavBarProps {
 
 export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
   const t = useTranslations('common');
-  const [mounted, setMounted] = useState(false);
-  const user = useUser();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { currentUser: user } = useAuthContext();
 
   return (
     <nav
@@ -77,21 +72,7 @@ export function NavBar({ className, logoUrl }: NavBarProps): React.JSX.Element {
             </Link>
           </RowCenter>
           <RowCenter className="gap-3">
-            {!mounted ? (
-              // Rendu par défaut pendant l'hydration (identique au SSR)
-              <>
-                <Link href="#">
-                  <Button variant="outline" size="default" className=" cursor-not-allowed">
-                    {t('generics.signup')}
-                  </Button>
-                </Link>
-                <Link href={ROUTES.login}>
-                  <Button variant="default" size="default">
-                    {t('generics.login')}
-                  </Button>
-                </Link>
-              </>
-            ) : user ? (
+            {user ? (
               <Link href={ROUTES.user.dashboard}>
                 <Button variant="default" size="default">
                   {t('navbar.dashboard')}

@@ -1,6 +1,7 @@
 'use client';
 
 import { AppProvider, useAppContext } from '@/contexts/AppContext';
+import { AuthProvider } from '@/contexts/AuthContext';
 import { messages } from '@/i18n/config';
 import { QueryProvider } from '@/providers/QueryProvider';
 import { IMAGE_FALLBACK } from '@/static/constants';
@@ -37,7 +38,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="m-0 p-0">
         <IntlProvider timeZone={timeZone} messages={messages['fr']} locale={'fr'}>
           <QueryProvider>
-            <AppProvider>{children}</AppProvider>
+            <AuthProvider>
+              <AppProvider>{children}</AppProvider>
+            </AuthProvider>
           </QueryProvider>
         </IntlProvider>
       </body>

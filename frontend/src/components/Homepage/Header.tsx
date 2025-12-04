@@ -1,5 +1,5 @@
 'use client';
-import { useUser } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { ROUTES } from '@/services/routes';
 import { HeaderType } from '@/types/strapi/componentTypes/header';
 import { useTranslations } from 'next-intl';
@@ -16,7 +16,7 @@ interface HeaderProps {
 
 export function Header({ data }: HeaderProps): React.JSX.Element {
   const tCommons = useTranslations('common');
-  const user = useUser();
+  const { currentUser: user } = useAuthContext();
 
   if (!data) {
     return <></>;

@@ -14,17 +14,13 @@ export const strapiApi = {
       return response.data;
     },
     me: async (): Promise<User> => {
-      // D'abord récupérer l'ID de l'utilisateur
-      const meResponse = await HttpService.get<User>(STRAPI_ROUTES.auth.me);
-      const userId = meResponse.data.id;
-
-      // Ensuite récupérer l'utilisateur complet avec populate
-      const userResponse = await HttpService.get<User>(`/api/users/${userId}`, {
+      const response = await HttpService.get<any>(STRAPI_ROUTES.auth.me, {
         params: {
-          populate: 'profilePicture',
+          populate: '*',
         },
       });
-      return userResponse.data;
+
+      return response.data;
     },
   },
   homePage: {

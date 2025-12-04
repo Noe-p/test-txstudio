@@ -1,4 +1,4 @@
-import { useAuthUser } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { strapiApi } from '@/services/strapi/api';
 import { getRiskData } from '@/services/utils';
 import { DashboardType } from '@/types/strapi/singleTypes/dashboard';
@@ -20,7 +20,7 @@ interface LoansTabProps {
 
 export function LoansTab({ dashboardData }: LoansTabProps): React.JSX.Element {
   const t = useTranslations('common');
-  const { data: user } = useAuthUser();
+  const { currentUser: user } = useAuthContext();
   const { data: euribor } = useQuery<EuriborType>({
     queryKey: ['euribor'],
     queryFn: () => strapiApi.euribor.get(),

@@ -19,16 +19,36 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 
-import { useLogin } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
+import { strapiApi } from '@/services/strapi/api';
+import { ConfigurationType } from '@/types/strapi/singleTypes/configuration';
+import { useMutation } from '@tanstack/react-query';
 import { CheckCircle2, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-export function LoginPage() {
+interface LoginPageProps {
+  configurationData: ConfigurationType | null;
+}
+
+export function LoginPage(props: LoginPageProps): React.JSX.Element {
+  const { configurationData } = props;
   const t = useTranslations('common');
-  const loginMutation = useLogin();
+  const router = useRouter();
+  const { setToken } = useAuthContext();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const loginMutation = useMutation({
+    mutationFn: async (credentials: { identifier: string; password: string }) => {
+      return await strapiApi.auth.login(credentials);
+    },
+    onSuccess: (data) => {
+      setToken(data.jwt);
+      router.push('/users/dashboard');
+    },
+  });
 
   // Validation
   const isEmailValid = email.length > 0 && email.includes('@');
@@ -47,7 +67,10 @@ export function LoginPage() {
   };
 
   return (
-    <Layout className="flex items-center justify-center">
+    <Layout
+      className="flex items-center justify-center"
+      configurationData={configurationData ?? null}
+    >
       <div className="w-full px-6 md:px-10">
         <div className="mx-auto w-full max-w-4xl md:max-w-5xl">
           <Grid2 className="rounded-lg overflow-hidden shadow-sm bg-background">
